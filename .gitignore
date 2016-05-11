@@ -1,0 +1,5 @@
+App/.vs/**
+App/packages/**
+App/Diiezer2.0/App_Data/**
+App/Diiezer2.0/bin/**
+App/Diiezer2.0/obj/**
