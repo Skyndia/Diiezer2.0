@@ -4,7 +4,7 @@
 <h2>Details</h2>
 
 <div class="row">
-    <div class="span7">
+
         <h4>@Model.nom</h4>
         <hr />
         <dl class="dl-horizontal">
@@ -25,22 +25,36 @@
         <hr />
         <h4>Musiques</h4>
         <hr />
-        <d1 class="d1-horizontal">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
             @{
                 foreach (var item in Model.chansons)
                 {
-                    <h5>
-                        @item.Titre
-                        <audio src=@item.Musique controls></audio>
-                    </h5>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <h5>@item.Titre</h5>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <h5>
+                                <audio src=@item.Musique controls></audio>
+                            </h5>
+                        </div>
+                    </div>
                 }
             }
-        </d1>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <img src=@Model.cover style="width:250px;height:250px;">
+        </div>
     </div>
-    <div class="span5">
-        <img src=@Model.cover style="width:250px;height:250px;">
-    </div>
+
 </div>
+
+
+
 <p>
     @Html.ActionLink("Retourner à la liste des albums", "Index2")
 </p>
