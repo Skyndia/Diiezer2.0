@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diiezer2._0.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -46,7 +47,7 @@ namespace Diiezer.Models
                 chansons = chansons,
                 cover = "Diiezer/Content/cover/1.jpg",
                 duree = (int)album.Durée,
-                nombre = (int)album.Nb_chansons,
+                nombre = (int)album.NbChanson,
                 style = album.Style
             };
                
@@ -83,7 +84,7 @@ namespace Diiezer.Models
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nb_chansons,Titre,Durée,Artiste,Date,Style")] Album album)
+        public ActionResult Create([Bind(Include = "Id,NbChanson,Titre,Durée,Artiste,Date,Style")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +118,7 @@ namespace Diiezer.Models
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nb_chansons,Titre,Durée,Artiste,Date,Style")] Album album)
+        public ActionResult Edit([Bind(Include = "Id,NbChanson,Titre,Durée,Artiste,Date,Style")] Album album)
         {
             if (ModelState.IsValid)
             {

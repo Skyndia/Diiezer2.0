@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Diiezer2._0.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -23,13 +24,13 @@ namespace Diiezer.Models
                 vmChansonInformations.Add(new vmChansonInformation {
                     album = item.Album1.Titre,
                     artiste = item.Album1.Artiste1.Nom,
-                    durée = (int)item.durée,
+                    durée = (int)item.Durée,
                     note = (int)item.Note,
-                    titre = item.titre,
+                    titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
-                    musique = item.musique
+                    musique = item.Musique
                 });
             }
             return View(vmChansonInformations);
@@ -47,13 +48,13 @@ namespace Diiezer.Models
             {
                 album = chanson.Album1.Titre,
                 artiste = chanson.Album1.Artiste1.Nom,
-                durée = (int)chanson.durée,
+                durée = (int)chanson.Durée,
                 note = (int)chanson.Note,
-                titre = chanson.titre,
+                titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,
                 idChanson = chanson.Id,
-                musique = chanson.musique
+                musique = chanson.Musique
             };
 
             if (chanson == null)
@@ -75,7 +76,7 @@ namespace Diiezer.Models
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,durée,titre,album,Note")] Chanson chanson)
+        public ActionResult Create([Bind(Include = "Id,Durée,Titre,Album,Note")] Chanson chanson)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +85,7 @@ namespace Diiezer.Models
                 return RedirectToAction("Index");
             }
 
-            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.album);
+            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.Album);
             return View(chanson);
         }
 
@@ -100,7 +101,7 @@ namespace Diiezer.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.album);
+            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.Album);
             return View(chanson);
         }
 
@@ -109,7 +110,7 @@ namespace Diiezer.Models
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,durée,titre,album,Note")] Chanson chanson)
+        public ActionResult Edit([Bind(Include = "Id,Durée,Titre,Album,Note")] Chanson chanson)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +118,7 @@ namespace Diiezer.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.album);
+            ViewBag.album = new SelectList(db.Album, "Id", "Titre", chanson.Album);
             return View(chanson);
         }
 
