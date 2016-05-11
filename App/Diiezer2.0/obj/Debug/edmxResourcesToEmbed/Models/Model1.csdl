@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DiiezerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NbChanson" Type="Int32" />
+    <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Durée" Type="Int32" />
+    <Property Name="Artiste" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Style" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cover" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Artiste1" Relationship="Self.FK_Album_ToArtiste" FromRole="Album" ToRole="Artiste" />
+    <NavigationProperty Name="Chanson" Relationship="Self.FK_Chanson_ToAlbum" FromRole="Album" ToRole="Chanson" />
+  </EntityType>
+  <EntityType Name="Artiste">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Album" Relationship="Self.FK_Album_ToArtiste" FromRole="Artiste" ToRole="Album" />
+  </EntityType>
+  <EntityType Name="Chanson">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Durée" Type="Int32" />
+    <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="Int32" />
+    <Property Name="Note" Type="Int32" />
+    <Property Name="Musique" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Extrait" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Album1" Relationship="Self.FK_Chanson_ToAlbum" FromRole="Chanson" ToRole="Album" />
+  </EntityType>
+  <Association Name="FK_Album_ToArtiste">
+    <End Role="Artiste" Type="Self.Artiste" Multiplicity="0..1" />
+    <End Role="Album" Type="Self.Album" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artiste">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Album">
+        <PropertyRef Name="Artiste" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chanson_ToAlbum">
+    <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+    <End Role="Chanson" Type="Self.Chanson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chanson">
+        <PropertyRef Name="Album" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DiiezerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Album" EntityType="Self.Album" />
+    <EntitySet Name="Artiste" EntityType="Self.Artiste" />
+    <EntitySet Name="Chanson" EntityType="Self.Chanson" />
+    <AssociationSet Name="FK_Album_ToArtiste" Association="Self.FK_Album_ToArtiste">
+      <End Role="Artiste" EntitySet="Artiste" />
+      <End Role="Album" EntitySet="Album" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chanson_ToAlbum" Association="Self.FK_Chanson_ToAlbum">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Chanson" EntitySet="Chanson" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

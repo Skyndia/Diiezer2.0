@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DiiezerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NbChanson" Type="int" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Durée" Type="int" />
+          <Property Name="Artiste" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Style" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cover" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Artiste">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Chanson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Durée" Type="int" />
+          <Property Name="Titre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Album" Type="int" />
+          <Property Name="Note" Type="int" />
+          <Property Name="Musique" Type="nvarchar" MaxLength="50" />
+          <Property Name="Extrait" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Album_ToArtiste">
+          <End Role="Artiste" Type="Self.Artiste" Multiplicity="0..1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artiste">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="Artiste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chanson_ToAlbum">
+          <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+          <End Role="Chanson" Type="Self.Chanson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chanson">
+              <PropertyRef Name="Album" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiiezerDBModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Artiste" EntityType="Self.Artiste" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chanson" EntityType="Self.Chanson" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Album_ToArtiste" Association="Self.FK_Album_ToArtiste">
+            <End Role="Artiste" EntitySet="Artiste" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chanson_ToAlbum" Association="Self.FK_Chanson_ToAlbum">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Chanson" EntitySet="Chanson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiiezerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NbChanson" Type="Int32" />
+          <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Durée" Type="Int32" />
+          <Property Name="Artiste" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Style" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cover" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Artiste1" Relationship="Self.FK_Album_ToArtiste" FromRole="Album" ToRole="Artiste" />
+          <NavigationProperty Name="Chanson" Relationship="Self.FK_Chanson_ToAlbum" FromRole="Album" ToRole="Chanson" />
+        </EntityType>
+        <EntityType Name="Artiste">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_Album_ToArtiste" FromRole="Artiste" ToRole="Album" />
+        </EntityType>
+        <EntityType Name="Chanson">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Durée" Type="Int32" />
+          <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Album" Type="Int32" />
+          <Property Name="Note" Type="Int32" />
+          <Property Name="Musique" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Extrait" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Album1" Relationship="Self.FK_Chanson_ToAlbum" FromRole="Chanson" ToRole="Album" />
+        </EntityType>
+        <Association Name="FK_Album_ToArtiste">
+          <End Role="Artiste" Type="Self.Artiste" Multiplicity="0..1" />
+          <End Role="Album" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artiste">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="Artiste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chanson_ToAlbum">
+          <End Role="Album" Type="Self.Album" Multiplicity="0..1" />
+          <End Role="Chanson" Type="Self.Chanson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chanson">
+              <PropertyRef Name="Album" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiiezerDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Album" EntityType="Self.Album" />
+          <EntitySet Name="Artiste" EntityType="Self.Artiste" />
+          <EntitySet Name="Chanson" EntityType="Self.Chanson" />
+          <AssociationSet Name="FK_Album_ToArtiste" Association="Self.FK_Album_ToArtiste">
+            <End Role="Artiste" EntitySet="Artiste" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chanson_ToAlbum" Association="Self.FK_Chanson_ToAlbum">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Chanson" EntitySet="Chanson" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiiezerDBModelStoreContainer" CdmEntityContainer="DiiezerDBEntities">
+          <EntitySetMapping Name="Album">
+            <EntityTypeMapping TypeName="DiiezerDBModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NbChanson" ColumnName="NbChanson" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Durée" ColumnName="Durée" />
+                <ScalarProperty Name="Artiste" ColumnName="Artiste" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Style" ColumnName="Style" />
+                <ScalarProperty Name="Cover" ColumnName="Cover" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artiste">
+            <EntityTypeMapping TypeName="DiiezerDBModel.Artiste">
+              <MappingFragment StoreEntitySet="Artiste">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chanson">
+            <EntityTypeMapping TypeName="DiiezerDBModel.Chanson">
+              <MappingFragment StoreEntitySet="Chanson">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Durée" ColumnName="Durée" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Album" ColumnName="Album" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Musique" ColumnName="Musique" />
+                <ScalarProperty Name="Extrait" ColumnName="Extrait" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

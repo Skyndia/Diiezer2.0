@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DiiezerDBModelStoreContainer" CdmEntityContainer="DiiezerDBEntities">
+    <EntitySetMapping Name="Album">
+      <EntityTypeMapping TypeName="DiiezerDBModel.Album">
+        <MappingFragment StoreEntitySet="Album">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NbChanson" ColumnName="NbChanson" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Durée" ColumnName="Durée" />
+          <ScalarProperty Name="Artiste" ColumnName="Artiste" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Style" ColumnName="Style" />
+          <ScalarProperty Name="Cover" ColumnName="Cover" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artiste">
+      <EntityTypeMapping TypeName="DiiezerDBModel.Artiste">
+        <MappingFragment StoreEntitySet="Artiste">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chanson">
+      <EntityTypeMapping TypeName="DiiezerDBModel.Chanson">
+        <MappingFragment StoreEntitySet="Chanson">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Durée" ColumnName="Durée" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Musique" ColumnName="Musique" />
+          <ScalarProperty Name="Extrait" ColumnName="Extrait" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
