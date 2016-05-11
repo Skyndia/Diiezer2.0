@@ -1,0 +1,23 @@
+﻿@model Diiezer.Models.vmArtisteInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.nom</h2>
+
+<div>
+    <h4>Albums : </h4>
+    <hr />
+    @{
+        foreach (var item in Model.albums)
+        {
+            <h5>
+                @item.Titre : @item.Nb_chansons musiques    @Html.ActionLink("Accéder à l'album", "../Album/Details2", new { id = item.Id })
+            </h5>
+        }
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

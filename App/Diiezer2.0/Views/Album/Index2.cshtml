@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Diiezer.Models.Album>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index2</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Album
+        </th>
+        <th>
+            Artiste
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artiste1.Nom)
+            </td>
+            <td>
+                @Html.ActionLink("Informations", "Details2", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -21,8 +21,8 @@ namespace Diiezer.Models
             return View(album.ToList());
         }
 
-        // GET: Album/Details2/5
-        public ActionResult Details2(int? id)
+        // GET: Album/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -57,20 +57,6 @@ namespace Diiezer.Models
             return View(albuminfo);
         }
 
-        // GET: Album/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Album album = db.Album.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-            return View(album);
-        }
 
         // GET: Album/Create
         public ActionResult Create()

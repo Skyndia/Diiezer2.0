@@ -1,0 +1,41 @@
+﻿@model Diiezer2._0.Models.vmChansonInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chanson</h4>
+    <hr />
+    <audio src=@Model.musique controls></audio>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            Titre : 
+            @Html.ActionLink(Model.titre, "Details", new { id = Model.idChanson })
+        </dd>
+        <dd>
+            Album : 
+            @Html.ActionLink(Model.album, "../Album/Details", new { id = Model.idAlbum })
+        </dd>
+        <dd>
+            Artiste : 
+            @Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })
+        </dd>
+        <dd>
+            durée : 
+            @Html.DisplayFor(modelItem => Model.durée)
+            s
+        </dd>
+        <dd>
+            note : 
+            @Html.DisplayFor(modelItem => Model.note)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

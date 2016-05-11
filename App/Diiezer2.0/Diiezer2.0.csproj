@@ -320,6 +320,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Artiste\Create.cshtml" />
+    <Content Include="Views\Artiste\Delete.cshtml" />
+    <Content Include="Views\Artiste\Details.cshtml" />
+    <Content Include="Views\Artiste\Edit.cshtml" />
+    <Content Include="Views\Artiste\Index.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Album\Index2.cshtml" />
+    <Content Include="Views\Chanson\Details.cshtml" />
+    <Content Include="Views\Chanson\Index.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Album\Delete.cshtml" />
+    <Content Include="Views\Chanson\Create.cshtml" />
+    <Content Include="Views\Chanson\Delete.cshtml" />
+    <Content Include="Views\Chanson\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -332,6 +348,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Diiezer.Models.Artiste>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Artistes : 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Diiezer2._0.Models.vmChansonInformation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Titre
+        </th>
+        <th>
+            Durée
+        </th>
+        <th>
+            Artiste
+        </th>
+        <th>
+            Album
+        </th>
+        <th>
+            Note
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.durée)
+        </td>
+        <td>
+            @Html.ActionLink(item.artiste, "../Artiste/Details", new { id = item.idArtiste })
+        </td>
+        <td>
+            @Html.ActionLink(item.album, "../Album/Details", new { id = item.idAlbum })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.note)
+        </td>
+    </tr>
+}
+
+</table>

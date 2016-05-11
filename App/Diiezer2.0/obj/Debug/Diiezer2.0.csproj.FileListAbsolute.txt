@@ -241,6 +241,6 @@ C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\bin\Mi
 C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\obj\Debug\Diiezer2.0.csprojResolveAssemblyReference.cache
 C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\obj\Debug\Diiezer2.0.dll
 C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\obj\Debug\Diiezer2.0.pdb
+C:\Users\benjamin\Documents\Cours\dotNET\Projet\Diiezer2.0\App\Diiezer2.0\obj\Debug\Diiezer2.0.csprojResolveAssemblyReference.cache
