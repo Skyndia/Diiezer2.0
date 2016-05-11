@@ -39,13 +39,14 @@ namespace Diiezer.Models
 
             var chansons = context.Chanson.Where(c => c.Album1.Id == id).ToList();
 
+
             vmAlbumInformation albuminfo = new vmAlbumInformation
             {
                 nom = album.Titre,
                 artiste = album.Artiste1.Nom,
                 idArtiste = album.Artiste1.Id,
                 chansons = chansons,
-                cover = "Diiezer/Content/cover/1.jpg",
+                cover = album.Cover,
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
                 style = album.Style
