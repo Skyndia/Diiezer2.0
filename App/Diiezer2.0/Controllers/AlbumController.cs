@@ -15,7 +15,7 @@ namespace Diiezer.Models
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
         // GET: Album
-        public ActionResult Index2()
+        public ActionResult Index()
         {
             var album = db.Album.Include(a => a.Artiste1);
             return View(album.ToList());
