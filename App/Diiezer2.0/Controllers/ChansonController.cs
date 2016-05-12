@@ -33,6 +33,7 @@ namespace Diiezer.Models
                     musique = item.Musique
                 });
             }
+            vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
             return View(vmChansonInformations);
         }
 
