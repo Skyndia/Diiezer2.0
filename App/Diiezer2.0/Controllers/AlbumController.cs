@@ -17,8 +17,9 @@ namespace Diiezer.Models
         // GET: Album
         public ActionResult Index()
         {
-            var album = db.Album.Include(a => a.Artiste1);
-            return View(album.ToList());
+            var album = db.Album.Include(a => a.Artiste1).ToList();
+            album.Sort((x, y) => x.Titre.CompareTo(y.Titre));
+            return View(album);
         }
 
         // GET: Album/Details/5

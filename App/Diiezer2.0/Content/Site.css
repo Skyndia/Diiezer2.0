@@ -27,13 +27,14 @@ textarea {
 }
 
 .grey-box{
-    background-color : rgba(128, 128, 128, 0.2);
+    background-color : rgba(128, 128, 128, 0.5);
     color : white;
+    padding : 10px;
 }
 
 a
 {
-    color : orange;
+    color : white;
 }
 
 a:focus
@@ -44,4 +45,15 @@ a:focus
 a:hover
 {
     color : orangered;
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+    width : 30%;
+    height : auto;
+}
+
+.portfolio-item img{
+    height : 100%;
+    width : 100%;
 }

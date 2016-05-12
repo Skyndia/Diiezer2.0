@@ -234,6 +234,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\vmAlbumInformation.cs" />
+    <Compile Include="Models\vmArtisteCover.cs" />
     <Compile Include="Models\vmArtisteInformation.cs" />
     <Compile Include="Models\vmChansonInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -335,6 +336,7 @@
     <Content Include="Views\Chanson\Create.cshtml" />
     <Content Include="Views\Chanson\Delete.cshtml" />
     <Content Include="Views\Chanson\Edit.cshtml" />
+    <Content Include="Views\Artiste\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

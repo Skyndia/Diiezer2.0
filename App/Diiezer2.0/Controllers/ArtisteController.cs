@@ -20,6 +20,27 @@ namespace Diiezer.Models
             return View(db.Artiste.ToList());
         }
 
+
+        //GET : Artiste
+        public ActionResult Index2()
+        {
+            List<vmArtisteCover> vmList = new List<vmArtisteCover>();
+
+            foreach (var art in db.Artiste.ToList())
+            {
+                vmArtisteCover artisteInfo = new vmArtisteCover
+                {
+                    id = art.Id,
+                    nom = art.Nom,
+                    cover = db.Album.Where(a => a.Artiste1.Id == art.Id).FirstOrDefault().Cover
+                };
+
+                vmList.Add(artisteInfo);
+            }
+            vmList.Sort((x,y) => x.nom.CompareTo(y.nom));
+            return View(vmList);
+        }
+
         // GET: Artiste/Details/5
         public ActionResult Details(int? id)
         {
