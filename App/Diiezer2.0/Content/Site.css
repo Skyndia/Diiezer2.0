@@ -57,3 +57,33 @@ a:hover
     height : 100%;
     width : 100%;
 }
+
+
+.pagination > .active > a
+{
+    cursor : auto;
+    color : black;
+    background : white;
+    border-color : rgb(255, 106, 0);
+}
+
+.pagination > .active > a:hover
+{
+    cursor : auto;
+    color : white;
+    background : rgb(128,128,128);
+}
+
+
+.pagination > li > a
+{
+    color : black;
+    background : white;
+    border-color : rgb(255, 106, 0);
+}
+
+.pagination > li > a:hover
+{
+    color : white;
+    background : rgb(128,128,128);
+}

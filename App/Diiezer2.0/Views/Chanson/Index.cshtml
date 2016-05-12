@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+<h2>Page @ViewBag.page</h2>
 
 <table class="table grey-box">
     <tr>
@@ -25,7 +26,7 @@
         </th>
         <th></th>
     </tr>
-
+    
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -47,3 +48,26 @@
 }
 
 </table>
+
+
+<!-- Pagination -->
+<div class="row text-center">
+    <div class="col-lg-12">
+        <ul class="pagination">
+            <li>
+                <a href="/Chanson/Index/@ViewBag.precedente">&laquo;</a>  
+            </li>
+            @for (int i = 1; i <= ViewBag.nbPage; i++)
+            {
+                <li class="active">
+                    <a href="/Chanson/Index/@i">@i</a>
+                </li>
+            }        
+
+            <li>
+                <a href="/Chanson/Index/@ViewBag.suivante">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /.row -->

@@ -14,9 +14,15 @@ namespace Diiezer.Models
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
-        // GET: Chanson
-        public ActionResult Index()
+        // GET: Chanson/Index/5
+        public ActionResult Index(int? id)
         {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = 1;
+            }
+
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
@@ -33,8 +39,26 @@ namespace Diiezer.Models
                     musique = item.Musique
                 });
             }
+            int NbChansonsParPage = 20;
+            int nbPage = vmChansonInformations.Count / NbChansonsParPage + 1;
+            int precedente = 1;
+            int suivante = nbPage;
+
+            if (id > 2) precedente = id.Value - 1;
+            if (id < nbPage - 1) suivante = id.Value + 1;
+
+            ViewBag.page = id;
+            ViewBag.nbPage = nbPage;
+            ViewBag.precedente = precedente;
+            ViewBag.suivante = suivante;
+
+            int n = vmChansonInformations.Count;
+            int max = NbChansonsParPage;
+            if (NbChansonsParPage > n - NbChansonsParPage * (id.Value - 1)) max = n - NbChansonsParPage * (id.Value - 1);
+
+
             vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
-            return View(vmChansonInformations);
+            return View(vmChansonInformations.Skip(20 * (id.Value - 1)).Take(max));
         }
 
         // GET: Chanson/Details/5
