@@ -12,18 +12,13 @@ namespace Diiezer2._0.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Artiste
+    public partial class Note
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Artiste()
-        {
-            this.Album = new HashSet<Album>();
-        }
-    
         public int Id { get; set; }
-        public string Nom { get; set; }
+        public int Chanson { get; set; }
+        public int Utilisateur { get; set; }
+        public int Note1 { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Album> Album { get; set; }
+        public virtual Chanson Chanson1 { get; set; }
     }
 }

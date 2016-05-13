@@ -50,7 +50,7 @@ namespace Diiezer.Models
                 cover = album.Cover,
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
-                style = album.Style
+                genre = album.Genre1.Nom
             };
                
       

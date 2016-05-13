@@ -5,11 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b8dde1aab43e4544bcc9dc19ddde4e68" Name="Diagram1">
-        <EntityTypeShape EntityType="DiiezerDBModel.Album" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DiiezerDBModel.Artiste" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DiiezerDBModel.Chanson" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="DiiezerDBModel.FK_Album_ToArtiste" ManuallyRouted="false" />
-        <AssociationConnector Association="DiiezerDBModel.FK_Chanson_ToAlbum" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Album" Width="1.5" PointX="2.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Artiste" Width="1.5" PointX="0.5" PointY="2.375" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Chanson" Width="1.5" PointX="4.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Genre" Width="1.5" PointX="0.625" PointY="0.5" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Note" Width="1.5" PointX="7" PointY="0.5" />
+        <AssociationConnector Association="DiiezerDBModel.FK_Album_ToArtiste" />
+        <AssociationConnector Association="DiiezerDBModel.FK_Album_ToGenre" />
+        <AssociationConnector Association="DiiezerDBModel.FK_Chanson_ToAlbum" />
+        <AssociationConnector Association="DiiezerDBModel.FK_Note_ToMusique" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
