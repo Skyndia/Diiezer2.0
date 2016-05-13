@@ -33,6 +33,15 @@
             note : 
             @Html.DisplayFor(modelItem => Model.note)
         </dd>
+        @{
+            if (Model.isExtract && User.Identity.IsAuthenticated)
+            {
+                <dd>Acheter morceaux</dd>
+            } else
+            {
+                <dd>Morceaux acheté</dd>
+            }
+        }
 
     </dl>
 </div>

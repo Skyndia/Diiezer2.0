@@ -44,6 +44,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.note)
         </td>
+        @{
+            if (item.isExtract && User.Identity.IsAuthenticated)
+            {
+                <td>Acheter morceaux</td>
+            }
+         }
     </tr>
 }
 

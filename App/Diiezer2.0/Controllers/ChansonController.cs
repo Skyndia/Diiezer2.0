@@ -22,6 +22,7 @@ namespace Diiezer.Models
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 id = 1;
             }
+            string user = User.Identity.Name;
 
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
             
@@ -44,8 +45,18 @@ namespace Diiezer.Models
                 }
                 else note = tmp / i;
 
+                string musique;
+                bool isExtract = true;
+
+                if (db.Achat.Where(c=>c.Chanson1.Id == item.Id && c.Utilisateur == user ).ToList().Count() >= 1)
+                {
+                    musique = item.Musique;
+                    isExtract = false;
+                } else musique = item.Extrait;
+
                 vmChansonInformations.Add(new vmChansonInformation {
                     album = item.Album1.Titre,
+                    isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
                     note = note,
@@ -53,7 +64,7 @@ namespace Diiezer.Models
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
-                    musique = item.Musique
+                    musique = musique
                 });
             }
             int NbChansonsParPage = 20;
@@ -86,6 +97,7 @@ namespace Diiezer.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Chanson chanson = db.Chanson.Find(id);
+            string user = User.Identity.Name;
             var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
             int i = 0;
             int tmp = 0;
@@ -100,17 +112,29 @@ namespace Diiezer.Models
                 note = 2;
             }
             else note = tmp / i;
+            bool isExtract = true;
+            string musique;
+
+            if (db.Achat.Where(c => c.Chanson1.Id == chanson.Id && c.Utilisateur == user).ToList().Count() >= 1)
+            {
+                musique = chanson.Musique;
+                isExtract = false;
+            }
+            else musique = chanson.Extrait;
+            ViewBag.isExtract = isExtract;
+
             vmChansonInformation info = new vmChansonInformation
             {
                 album = chanson.Album1.Titre,
                 artiste = chanson.Album1.Artiste1.Nom,
                 durée = (int)chanson.Durée,
+                isExtract = isExtract,
                 note = note,
                 titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,
                 idChanson = chanson.Id,
-                musique = chanson.Musique
+                musique = musique
             };
 
             if (chanson == null)
