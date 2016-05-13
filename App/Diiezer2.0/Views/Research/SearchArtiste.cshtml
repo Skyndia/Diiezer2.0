@@ -1,1 +1,110 @@
-﻿Recherche d' artistes effectuée.
+﻿@model IEnumerable<Diiezer2._0.Models.vmArtisteCover>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+@for (int i = 0; i < Model.Count() / 3; i++)
+{
+    <div class="row">
+        <div class="col-md-4 portfolio-item">
+            <a href="/Artiste/Details/@Model.ElementAt(3 * i).id ">
+                <img class="img-responsive" src=@Model.ElementAt(3*i).cover alt="">
+            </a>
+            <h3>
+                <a href="/Artiste/Details/@Model.ElementAt(3 * i).id ">@Model.ElementAt(3 * i).nom</a>
+            </h3>
+        </div>
+        <div class="col-md-4 portfolio-item">
+            <a href="/Artiste/Details/@Model.ElementAt(3 * i + 1).id ">
+                <img class="img-responsive" src=@Model.ElementAt(3*i + 1).cover alt="">
+            </a>
+            <h3>
+                <a href="/Artiste/Details/@Model.ElementAt(3 * i + 1).id ">@Model.ElementAt(3 * i + 1).nom</a>
+            </h3>
+        </div>
+        <div class="col-md-4 portfolio-item">
+            <a href="/Artiste/Details/@Model.ElementAt(3 * i + 2).id ">
+                <img class="img-responsive" src=@Model.ElementAt(3*i + 2).cover alt="">
+            </a>
+            <h3>
+                <a href="/Artiste/Details/@Model.ElementAt(3 * i + 2).id ">@Model.ElementAt(3 * i + 2).nom</a>
+            </h3>
+        </div>
+    </div>
+}
+@{
+    var reste = Model.Count() - Model.Count() / 3;
+    var quotient = Model.Count() / 3;
+    if (reste == 0)
+    {
+
+    }
+    else
+    {
+        if (reste == 1)
+        {
+            <div class="row">
+                <div class="col-md-4 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src=@Model.ElementAt(3 * quotient).cover alt="">
+                    </a>
+                    <h3>
+                        <a href="/Artiste/Details/@Model.ElementAt(3 * quotient).id ">@Model.ElementAt(3 * quotient).nom</a>
+                    </h3>
+                </div>
+            </div>
+        }
+        else //reste == 2
+        {
+            <div class="row">
+                <div class="col-md-4 portfolio-item">
+                    <a href="/Artiste/Details/@Model.ElementAt(3 * quotient).id">
+                        <img class="img-responsive" src=@Model.ElementAt(3 * quotient).cover alt="">
+                    </a>
+                    <h3>
+                        <a href="/Artiste/Details/@Model.ElementAt(3 * quotient).id ">@Model.ElementAt(3 * quotient).nom</a>
+                    </h3>
+                </div>
+                <div class="col-md-4 portfolio-item">
+                    <a href="/Artiste/Details/@Model.ElementAt(3 * quotient + 1).id">
+                        <img class="img-responsive" src=@Model.ElementAt(3 * quotient + 1).cover alt="">
+                    </a>
+                    <h3>
+                        <a href="/Artiste/Details/@Model.ElementAt(3 * quotient + 1).id ">@Model.ElementAt(3 * quotient + 1).nom</a>
+                    </h3>
+                </div>
+            </div>
+        }
+    }
+}
+
+<!-- Pagination -->
+<div class="row text-center">
+    <div class="col-lg-12">
+        <ul class="pagination">
+            <li>
+                <a href="#">&laquo;</a>
+            </li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">4</a>
+            </li>
+            <li>
+                <a href="#">5</a>
+            </li>
+            <li>
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /.row -->
