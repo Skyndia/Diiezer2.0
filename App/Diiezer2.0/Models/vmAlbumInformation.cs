@@ -13,7 +13,7 @@ namespace Diiezer2._0.Models
         public int nombre { get; set; }
         public List<Chanson> chansons { get; set; }
         public int duree { get; set; }
-        public String genre { get; set; }
+        public string genre { get; set; }
         public String cover { get; set; }
     }
 

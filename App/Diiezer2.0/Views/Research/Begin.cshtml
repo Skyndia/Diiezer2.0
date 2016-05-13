@@ -1,5 +1,5 @@
 ﻿<div class="grey-box">
-    <form class="form-horizontal">
+    <form class="form-horizontal" name="form1" method="post">
         <div class="form-group">
             <label for="Text" class="col-xs-10 col-sm-6 col-md-1 col-lg-1 col-xl-1 control-label">Artiste</label>
             <div class="col-xs-10 col-sm-6 col-md-3 col-lg-3 col-xl-3">
@@ -45,10 +45,9 @@
             <label for="Select" class="col-xs-10 col-sm-6 col-md-1 col-lg-1 col-xl-1 control-label">Rechercher des</label>
             <div class="col-xs-10 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                 <select class="form-control" name="but">
-                    <option value="butTous">Tous</option>
-                    <option value="butArtiste">Artistes</option>
-                    <option value="butAlbum">Albums</option>
-                    <option value="butTitre">Titres</option>
+                    <option value="SearchArtiste">Artistes</option>
+                    <option value="SearchAlbum">Albums</option>
+                    <option value="SearchTitre">Titres</option>
                 </select>
             </div>
             <div class="col-xs-10 col-sm-10 col-md-6 col-l0-6 col-xl-6">
@@ -61,7 +60,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Rechercher</button>
+                <input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/Search'; document.form1.submit();" value="Rechercher" />
             </div>
         </div>
     </form>
