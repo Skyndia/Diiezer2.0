@@ -24,14 +24,31 @@ namespace Diiezer.Models
             }
 
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
+            
+
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
             {
+                var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
+                int i = 0;
+                int tmp = 0;
+                int note;
+                foreach (var item2 in notes)
+                {
+                    i++;
+                    tmp = tmp + item2.Note1;
+                }
+                if (i == 0)
+                {
+                    note = 2;
+                }
+                else note = tmp / i;
+
                 vmChansonInformations.Add(new vmChansonInformation {
                     album = item.Album1.Titre,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
-                    note = (int)item.Note,
+                    note = note,
                     titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
@@ -69,12 +86,26 @@ namespace Diiezer.Models
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Chanson chanson = db.Chanson.Find(id);
+            var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
+            int i = 0;
+            int tmp = 0;
+            int note;
+            foreach (var item in notes)
+            {
+                i++;
+                tmp = tmp + item.Note1;
+            }
+            if (i == 0)
+            {
+                note = 2;
+            }
+            else note = tmp / i;
             vmChansonInformation info = new vmChansonInformation
             {
                 album = chanson.Album1.Titre,
                 artiste = chanson.Album1.Artiste1.Nom,
                 durée = (int)chanson.Durée,
-                note = (int)chanson.Note,
+                note = note,
                 titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,
