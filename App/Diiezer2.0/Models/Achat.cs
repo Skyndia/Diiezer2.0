@@ -12,12 +12,11 @@ namespace Diiezer2._0.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Note
+    public partial class Achat
     {
         public int Id { get; set; }
-        public int Chanson { get; set; }
+        public Nullable<int> Chanson { get; set; }
         public string Utilisateur { get; set; }
-        public int Note1 { get; set; }
     
         public virtual Chanson Chanson1 { get; set; }
     }

@@ -29,6 +29,7 @@ namespace Diiezer2._0.Models
         public virtual DbSet<Artiste> Artiste { get; set; }
         public virtual DbSet<Chanson> Chanson { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
+        public virtual DbSet<Achat> Achat { get; set; }
         public virtual DbSet<Note> Note { get; set; }
     }
 }

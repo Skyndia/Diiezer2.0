@@ -17,6 +17,7 @@ namespace Diiezer2._0.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Chanson()
         {
+            this.Achat = new HashSet<Achat>();
             this.Note = new HashSet<Note>();
         }
     
@@ -28,6 +29,8 @@ namespace Diiezer2._0.Models
         public string Extrait { get; set; }
     
         public virtual Album Album1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Achat> Achat { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Note { get; set; }
     }
