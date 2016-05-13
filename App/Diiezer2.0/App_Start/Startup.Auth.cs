@@ -54,9 +54,9 @@ namespace Diiezer2._0
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1726546690891192",
+               appSecret: "0a9ecc1d4e2e2f9dca8f118e46f0a826");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
