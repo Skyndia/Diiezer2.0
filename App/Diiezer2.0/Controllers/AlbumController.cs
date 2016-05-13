@@ -17,6 +17,9 @@ namespace Diiezer.Models
         // GET: Album
         public ActionResult Index()
         {
+            ViewBag.userAuthenticated = User.Identity.IsAuthenticated;
+            ViewBag.userName = User.Identity.Name;
+
             var album = db.Album.Include(a => a.Artiste1).ToList();
             album.Sort((x, y) => x.Titre.CompareTo(y.Titre));
             return View(album);
