@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ChansonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -337,6 +338,7 @@
     <Content Include="Views\Chanson\Delete.cshtml" />
     <Content Include="Views\Chanson\Edit.cshtml" />
     <Content Include="Views\Artiste\Index2.cshtml" />
+    <Content Include="Views\Research\Begin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
