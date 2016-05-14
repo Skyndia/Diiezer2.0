@@ -125,6 +125,58 @@ namespace Diiezer2._0.Controllers
             return result;
         }
 
+        //Fait la recherche dans la table des artistes
+        private List<vmArtisteCover> requeteArtisteRapide(String critere)
+        {
+            List<vmArtisteCover> result = new List<vmArtisteCover>();
+            List<Artiste> artistes = new List<Artiste>();
+
+            String champArtiste = critere;
+
+            //Requête pour les artistes ici :
+            artistes = db.Artiste.Where(a => a.Nom.Contains(champArtiste)).ToList();
+
+            foreach (var art in artistes)
+            {
+                vmArtisteCover artisteInfo = new vmArtisteCover
+                {
+                    id = art.Id,
+                    nom = art.Nom,
+                    cover = db.Album.Where(a => a.Artiste1.Id == art.Id).FirstOrDefault().Cover
+                };
+
+                result.Add(artisteInfo);
+            }
+            return result;
+        }
+
+        //Fait la requete sur les albums
+        private List<Album> requeteAlbumRapide(String critere)
+        {
+            List<Album> result = new List<Album>();
+            String champAlbum = critere;
+
+            //Requête pour les artistes ici :
+            result = db.Album.Where(a => a.Titre.Contains(champAlbum)).ToList();
+
+            return result;
+        }
+
+        //fait la requete sur les chansons
+        private List<vmChansonInformation> requeteChansonRapide(String critere)
+        {
+            List<vmChansonInformation> result = new List<vmChansonInformation>();
+            String champTitre = critere;
+            List<Chanson> chansons = new List<Chanson>();
+
+            //Requête pour les artistes ici :
+            chansons = db.Chanson.Include(c => c.Album1).Where(a => a.Titre.Contains(champTitre)).ToList();
+
+
+            result = getVm(chansons);
+            return result;
+        }
+
         //POST : Search
         [HttpPost]
         public ActionResult Search(FormCollection criteres)
@@ -149,8 +201,28 @@ namespace Diiezer2._0.Controllers
             if ((but.CompareTo("SearchTitres") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Chansons
             {
                 result.chansons = requeteChanson(criteres);
+                result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
             }
             ViewBag.but = but;
+            return View("SearchResults", result);
+        }
+
+        //POST : Quick Search
+        public ActionResult QuickSearch(String critere)
+        {
+            vmResearchResult result = new vmResearchResult();
+
+            result.artistes = requeteArtisteRapide(critere);
+            result.artistes.Sort((x, y) => x.nom.CompareTo(y.nom));
+
+            result.albums = requeteAlbumRapide(critere);
+            result.albums.Sort((x, y) => x.Titre.CompareTo(y.Titre));
+
+            result.chansons = requeteChansonRapide(critere);
+            result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
+
+            ViewBag.but = "SearchAll";
+
             return View("SearchResults", result);
         }
     }
