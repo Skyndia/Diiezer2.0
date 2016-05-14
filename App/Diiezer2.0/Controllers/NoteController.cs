@@ -19,6 +19,7 @@ namespace Diiezer2._0.Controllers
         {
             
             var notes = db.Note.Where(c => c.Chanson1.Id == int.Parse(idmusique) && c.Utilisateur == User.Identity.Name).ToList();
+
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
