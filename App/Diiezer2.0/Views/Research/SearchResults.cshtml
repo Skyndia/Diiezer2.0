@@ -1,1 +1,48 @@
 ﻿@model Diiezer2._0.Models.vmResearchResult
+
+<h4>Résultats de la recherche</h4>
+
+@{
+    if ((ViewBag.but.CompareTo("SearchArtists") == 0) || (ViewBag.but.CompareTo("SearchAll") == 0))
+    {
+        <h2>Artistes</h2>
+        if ((Model.artistes != null) && (Model.artistes.Count > 0))
+        {
+            Html.RenderPartial("partialSearchArtiste", Model.artistes);
+        }
+        else
+        {
+            <p>Aucun Artiste correspondant à la description n'a été trouvé.</p>
+        }
+    }
+
+
+
+    if ((ViewBag.but.CompareTo("SearchAlbums") == 0) || (ViewBag.but.CompareTo("SearchAll") == 0))
+    {
+        <h2>Albums</h2>
+        if ((Model.albums != null)&&(Model.albums.Count > 0))
+        {
+            Html.RenderPartial("partialSearchAlbum", Model.albums);
+        }
+        else
+        {
+            <p>Aucun Album correspondant à la description n'a été trouvé.</p>
+        }
+    }
+
+
+
+    if ((ViewBag.but.CompareTo("SearchTitres") == 0) || (ViewBag.but.CompareTo("SearchAll") == 0))
+    {
+        <h2>Chansons</h2>
+        if ((Model.chansons != null) && (Model.chansons.Count > 0))
+        {
+            Html.RenderPartial("partialSearchTitre", Model.chansons);
+        }
+        else
+        {
+            <p>Aucune Chanson correspondant à la description n'a été trouvé.</p>
+        }
+    }
+}
