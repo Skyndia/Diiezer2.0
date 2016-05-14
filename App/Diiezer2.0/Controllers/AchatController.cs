@@ -21,6 +21,17 @@ namespace Diiezer2._0.Controllers
             return View(achat.ToList());
         }
 
+        public ActionResult MesAchats()
+        {
+            if (User.Identity.IsAuthenticated == false)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var achats = db.Achat.Where(c=>c.Utilisateur == User.Identity.Name);
+            return View(achats);
+        }
+
         // GET: Achat/Details/5
         public ActionResult Details(int? id)
         {

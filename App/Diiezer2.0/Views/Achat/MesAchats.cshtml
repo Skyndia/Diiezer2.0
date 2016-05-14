@@ -1,0 +1,26 @@
+﻿@model IEnumerable< Diiezer2._0.Models.Achat>
+
+
+
+
+<div>
+    <h4>Achat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @{
+            foreach (var item in Model)
+            {
+                <dd>
+                    @item.Chanson1.Titre
+                </dd>
+                <dd>
+                    @item.Chanson1.Album1.Titre
+                </dd>
+                <dd>
+                    @item.Date
+                </dd>
+            }
+        }
+    </dl>
+</div>
+

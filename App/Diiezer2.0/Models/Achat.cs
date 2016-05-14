@@ -17,6 +17,7 @@ namespace Diiezer2._0.Models
         public int Id { get; set; }
         public Nullable<int> Chanson { get; set; }
         public string Utilisateur { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         public virtual Chanson Chanson1 { get; set; }
     }

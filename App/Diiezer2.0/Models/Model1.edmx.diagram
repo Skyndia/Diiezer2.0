@@ -12,10 +12,10 @@
         <AssociationConnector Association="DiiezerDBModel.FK_Album_ToArtiste" />
         <AssociationConnector Association="DiiezerDBModel.FK_Album_ToGenre" />
         <AssociationConnector Association="DiiezerDBModel.FK_Chanson_ToAlbum" />
-        <EntityTypeShape EntityType="DiiezerDBModel.Achat" Width="1.5" PointX="7" PointY="0.625" />
         <EntityTypeShape EntityType="DiiezerDBModel.Note" Width="1.5" PointX="7" PointY="2.625" />
-        <AssociationConnector Association="DiiezerDBModel.FK_Achat_ToChanson" />
         <AssociationConnector Association="DiiezerDBModel.FK_Note_ToMusique" />
+        <EntityTypeShape EntityType="DiiezerDBModel.Achat" Width="1.5" PointX="7" PointY="0.5" />
+        <AssociationConnector Association="DiiezerDBModel.FK_Achat_ToChanson" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
