@@ -42,14 +42,58 @@ namespace Diiezer.Models
             }
 
             var chansons = context.Chanson.Where(c => c.Album1.Id == id).ToList();
+            string user = User.Identity.Name;
 
+            List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
+
+            foreach (var item in chansons)
+            {
+                var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
+                int i = 0;
+                int tmp = 0;
+                int note;
+                foreach (var item2 in notes)
+                {
+                    i++;
+                    tmp = tmp + item2.Note1;
+                }
+                if (i == 0)
+                {
+                    note = 2;
+                }
+                else note = tmp / i;
+
+                string musique;
+                bool isExtract = true;
+
+                if (db.Achat.Where(c => c.Chanson1.Id == item.Id && c.Utilisateur == user).ToList().Count() >= 1)
+                {
+                    musique = item.Musique;
+                    isExtract = false;
+                }
+                else musique = item.Extrait;
+
+                vmChansonInformations.Add(new vmChansonInformation
+                {
+                    album = item.Album1.Titre,
+                    isExtract = isExtract,
+                    artiste = item.Album1.Artiste1.Nom,
+                    durée = (int)item.Durée,
+                    note = note,
+                    titre = item.Titre,
+                    idAlbum = item.Album1.Id,
+                    idArtiste = item.Album1.Artiste1.Id,
+                    idChanson = item.Id,
+                    musique = musique
+                });
+            }
 
             vmAlbumInformation albuminfo = new vmAlbumInformation
             {
                 nom = album.Titre,
                 artiste = album.Artiste1.Nom,
                 idArtiste = album.Artiste1.Id,
-                chansons = chansons,
+                chansons = vmChansonInformations,
                 cover = album.Cover,
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
