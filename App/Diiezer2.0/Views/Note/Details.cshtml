@@ -1,0 +1,50 @@
+﻿@model Diiezer2._0.Models.Note
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Note</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Utilisateur)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Utilisateur)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Note1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Note1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Chanson1.Titre)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Chanson1.Titre)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
