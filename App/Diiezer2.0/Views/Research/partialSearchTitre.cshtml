@@ -1,15 +1,28 @@
-﻿@model IEnumerable<Diiezer2._0.Models.Artiste>
+﻿@model IEnumerable<Diiezer2._0.Models.vmChansonInformation>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
+<h2>Page @ViewBag.page</h2>
 
 <table class="table grey-box">
     <tr>
         <th>
-            Artistes :
+            Titre
+        </th>
+        <th>
+            Durée
+        </th>
+        <th>
+            Artiste
+        </th>
+        <th>
+            Album
+        </th>
+        <th>
+            Note
         </th>
         <th></th>
     </tr>
@@ -18,12 +31,28 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nom)
+                @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.DisplayFor(modelItem => item.durée)
             </td>
+            <td>
+                @Html.ActionLink(item.artiste, "../Artiste/Details", new { id = item.idArtiste })
+            </td>
+            <td>
+                @Html.ActionLink(item.album, "../Album/Details", new { id = item.idAlbum })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.note)
+            </td>
+            @{
+                if (item.isExtract && User.Identity.IsAuthenticated)
+                {
+                    <td>Acheter morceaux</td>
+                }
+            }
         </tr>
-    }
+                }
 
 </table>
+

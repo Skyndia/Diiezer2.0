@@ -30,7 +30,7 @@ namespace Diiezer.Models
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
             {
-                var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
+                var notes = db.Note.Where(c => c.Chanson1.Id == item.Id).ToList();
                 int i = 0;
                 int tmp = 0;
                 int note;
