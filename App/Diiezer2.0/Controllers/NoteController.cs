@@ -18,10 +18,7 @@ namespace Diiezer2._0.Controllers
         public ActionResult Soumettre(int idmusique, int note, string url)
         {
             
-
-            var context = new DiiezerDBEntities();
-
-            var notes = context.Note.Where(c => c.Chanson1.Id == idmusique && c.Utilisateur == User.Identity.Name).ToList();
+            var notes = db.Note.Where(c => c.Chanson1.Id == idmusique && c.Utilisateur == User.Identity.Name).ToList();
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
