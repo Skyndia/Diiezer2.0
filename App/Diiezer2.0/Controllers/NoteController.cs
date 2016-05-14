@@ -16,8 +16,7 @@ namespace Diiezer2._0.Controllers
 
         [HttpPost]
         public ActionResult Soumettre(int idmusique, int note, string url)
-        {
-            
+        {           
 
             var context = new DiiezerDBEntities();
 
