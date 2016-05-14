@@ -5,3 +5,4 @@ App/Diiezer2.0/bin/**
 App/Diiezer2.0/obj/**
 App/Diiezer2.0/Diiezer2.0.csproj
 App/Diiezer2.0/Content/song/**
+App/packages/**
