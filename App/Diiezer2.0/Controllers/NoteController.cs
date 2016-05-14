@@ -15,23 +15,22 @@ namespace Diiezer2._0.Controllers
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
         [HttpPost]
-        public ActionResult Soumettre(int idmusique, int note, string url)
-        {           
+        public ActionResult Soumettre(string idmusique, string note, string url)
+        {
+            
+            var notes = db.Note.Where(c => c.Chanson1.Id == int.Parse(idmusique) && c.Utilisateur == User.Identity.Name).ToList();
 
-            var context = new DiiezerDBEntities();
-
-            var notes = context.Note.Where(c => c.Chanson1.Id == idmusique && c.Utilisateur == User.Identity.Name).ToList();
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
-                currentNote.Note1 = note;
+                currentNote.Note1 = int.Parse(note);
                 db.SaveChanges();
                 
             } else
             {
                 Note nouvelleNote = new Note();
-                nouvelleNote.Note1 = note;
-                nouvelleNote.Chanson = idmusique;
+                nouvelleNote.Note1 = int.Parse(note);
+                nouvelleNote.Chanson = int.Parse(idmusique);
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
                 db.SaveChanges();
