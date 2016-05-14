@@ -14,29 +14,36 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
+        
+
         [HttpPost]
-        public ActionResult Soumettre(string idmusique, string note, string url)
+        public ActionResult Soumettre(string idMusique, int note, string idAlbum)
         {
+            int idA = int.Parse(idAlbum);
+            int idM = int.Parse(idMusique);
             
-            var notes = db.Note.Where(c => c.Chanson1.Id == int.Parse(idmusique) && c.Utilisateur == User.Identity.Name).ToList();
+
+            var notes = db.Note.Where(c => c.Chanson1.Id == int.Parse(idMusique) && c.Utilisateur == User.Identity.Name).ToList();
+
 
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
-                currentNote.Note1 = int.Parse(note);
+                currentNote.Note1 = note;
                 db.SaveChanges();
                 
             } else
             {
                 Note nouvelleNote = new Note();
-                nouvelleNote.Note1 = int.Parse(note);
-                nouvelleNote.Chanson = int.Parse(idmusique);
+                nouvelleNote.Note1 = note;
+                nouvelleNote.Chanson = idM;
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
                 db.SaveChanges();
             }
-
-            return View(url);
+            
+            string url = "../Album/Details/" + idAlbum;
+            return Redirect(url);
         }
 
         // GET: Note
