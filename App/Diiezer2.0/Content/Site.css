@@ -93,3 +93,19 @@ a:hover
 {
     outline-offset : 0px;
 }
+
+.select-note
+{
+    width : 35%;
+}
+
+.audio-box
+{
+    width : 100%;
+    vertical-align : middle;
+}
+
+.img-centre
+{
+    vertical-align : middle;
+}

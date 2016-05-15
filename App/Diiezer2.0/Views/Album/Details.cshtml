@@ -41,29 +41,18 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                             <h5>
-
-<!-- item.musique peut être l'extrait ou la musique complète-->
-
-                                <audio src=@item.musique controls style="width: 250px; "></audio>
-
+                                <audio src=@item.musique controls class="audio-box"></audio>
                             </h5>
                         </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">                            
-                            @{ 
-                                if (item.isExtract && User.Identity.IsAuthenticated)
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">                            
+                            @{
+                                if (!item.isExtract && User.Identity.IsAuthenticated)
                                 {
-                                    <h5>Acheter la musique complète @item.note</h5>
-                                } else if (item.isExtract)
-                                {
-                                    <h5>Extrait</h5>
-                                }
-                                else
-                                {
-                                    <a href=@item.musique download>Télécherger @item.note</a>
+                                    <a href=@item.musique download><img src="~/Content/img/download2.png" class="img-responsive"></a>
                                 }
                             }
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
                             @{
                                 for (int i = 0; i < 5; i++)
                                 {
@@ -75,11 +64,11 @@
                                     {
 
                                         <img src="~/Content/img/EmptyStar2.png" style="width:15px;height:15px;">
-
-
                                     }
                                 }
                             }
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
                             @if (Request.IsAuthenticated)
                             {
                                 using (Html.BeginForm("Soumettre", "Note"))
@@ -87,7 +76,7 @@
                                     <input type="hidden" name="url" value="../Album/Details/@item.idAlbum" />
                                     <input type="hidden" name="idMusique" value="@item.idChanson" />
 
-                                    <select name="note" >
+                                    <select name="note" class="form-control select-note">
 
                                         @for (int i = 0; i < 6; i++)
                                         {
@@ -101,10 +90,10 @@
                                             }
                                         }
                                     </select>
-                                    <input type="submit" value="Noter" />
+                                    <input type="submit" class="btn btn-info" value="Noter" />
                                 }
                             }
-                            
+
                         </div>
                     </div>
                 }
