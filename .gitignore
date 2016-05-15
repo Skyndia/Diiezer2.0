@@ -1,4 +1,4 @@
-App/.vs/**
+﻿App/.vs/**
 App/packages/**
 App/Diiezer2.0/App_Data/**
 App/Diiezer2.0/bin/**
@@ -12,6 +12,7 @@ App/Diiezer2.0/Models/Achat.cs
 App/Diiezer2.0/Models/Album.cs
 App/Diiezer2.0/Models/Artiste.cs
 App/Diiezer2.0/Models/Chanson.cs
+App/Diiezer2.0/Models/Commentaire.cs
 App/Diiezer2.0/Models/Genre.cs
 App/Diiezer2.0/Models/IdentityModels.cs
 App/Diiezer2.0/Models/*.tt
