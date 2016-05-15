@@ -48,19 +48,31 @@
                             @{ 
                                 if (item.isExtract && User.Identity.IsAuthenticated)
                                 {
-                                    <h5>Acheter la musique complète</h5>
+                                    <h5>Acheter la musique complète @item.note</h5>
                                 } else if (item.isExtract)
                                 {
                                     <h5>Extrait</h5>
                                 }
                                 else
                                 {
-                                    <a href=@item.musique download>Télécherger</a>
+                                    <a href=@item.musique download>Télécherger @item.note</a>
                                 }
                             }
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                          
+                            @{
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    if (i < item.note)
+                                    {
+                                        <img src="~/Content/img/fullstar.jpg" style="width:15px;height:15px;">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/img/emptystar.jpg" style="width:15px;height:15px;">
+                                    }
+                                }
+                            }
                             @if (Request.IsAuthenticated)
                             {
                                 using (Html.BeginForm("Soumettre", "Note"))
@@ -68,13 +80,19 @@
                                     <input type="hidden" name="idAlbum" value="@item.idAlbum" />
                                     <input type="hidden" name="idMusique" value="@item.idChanson" />
 
-                                    <select name="note" value="@item.note">
+                                    <select name="note" >
 
                                         @for (int i = 0; i < 6; i++)
                                         {
-                                            <option value=@i>@i</option>
+                                            if (i == item.note)
+                                            {
+                                                <option value=@i selected="selected">@i</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@i>@i</option>
+                                            }
                                         }
-
                                     </select>
                                     <input type="submit" value="Noter" />
                                 }
