@@ -72,7 +72,7 @@
         @{
             if (Model.isExtract && User.Identity.IsAuthenticated)
             {
-                <dd>Acheter morceaux</dd>
+                <dd>@Html.ActionLink("Acheter ..", "../Achat/AcheterChanson", new { idChanson = Model.idChanson })</dd>
             } else if (User.Identity.IsAuthenticated)
             {
                 <dd>Morceaux acheté</dd>
