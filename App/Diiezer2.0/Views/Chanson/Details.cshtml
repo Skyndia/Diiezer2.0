@@ -81,6 +81,38 @@
 
     </dl>
 </div>
+
+<div class="grey-box">
+    <dl class="dl-horizontal">
+        <dd>  
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Commenter", "Chanson"))
+                {
+                    <input type="hidden" name="url" value="../Chanson/Details/@Model.idChanson" />
+                    <input type="hidden" name="idMusique" value="@Model.idChanson" />
+                    <textarea rows="4" cols="50" name="comment">
+                        Ecrivez votre commentaire ...
+                    </textarea>
+
+                    <input type="submit" value="Commenter" />
+                }
+            }
+        </dd>
+    </dl>  
+    <h4>Commentaires</h4>
+    <hr />
+    @{
+        foreach (var item in Model.commentaires)
+        {
+            <hr />
+            <h8>@item.Texte</h8>
+        }
+    }      
+</div>
+
+
+ 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

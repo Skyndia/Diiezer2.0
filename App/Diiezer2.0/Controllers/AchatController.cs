@@ -70,7 +70,8 @@ namespace Diiezer2._0.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var achats = db.Achat.Where(c=>c.Utilisateur == User.Identity.Name);
+            var achats = db.Achat.Where(c=>c.Utilisateur == User.Identity.Name).Reverse();
+
             return View(achats);
         }
 
