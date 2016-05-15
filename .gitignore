@@ -21,3 +21,5 @@ App/Diiezer2.0/Models/Model1.edmx
 App/Diiezer2.0/Models/Model1.edmx.diagram
 App/Diiezer2.0/Models/Model1.edmx.sql
 App/Diiezer2.0/Models/Note.cs
+App/Diiezer2.0/Models/ManageViewModels.cs
+App/Diiezer2.0/Models/Model1.Context.cs
