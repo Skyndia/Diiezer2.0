@@ -14,6 +14,48 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
+        public ActionResult AcheterChanson(int idChanson)
+        {
+
+            var achats = db.Achat.Where(c => c.Utilisateur == User.Identity.Name && c.Chanson1.Id == idChanson).ToList();
+            if (achats.Count() == 0)
+            {
+                Achat nouvelAchat = new Achat();
+                nouvelAchat.Utilisateur = User.Identity.Name;
+                nouvelAchat.Chanson = idChanson;
+                nouvelAchat.Date = DateTime.Now;
+                db.Achat.Add(nouvelAchat);
+                db.SaveChanges();
+            }
+
+
+            return Redirect("../Chanson/Details/"+idChanson.ToString());
+        }
+
+        public ActionResult AcheterAlbum(int idAlbum)
+        {
+            var chansons = db.Chanson.Where(c => c.Album1.Id == idAlbum).ToList();
+
+            foreach (var item in chansons)
+            {
+                var achats = db.Achat.Where(c => c.Utilisateur == User.Identity.Name && c.Chanson1.Id == item.Id).ToList();
+                if (achats.Count() == 0)
+                {
+                    Achat nouvelAchat = new Achat();
+                    nouvelAchat.Utilisateur = User.Identity.Name;
+                    nouvelAchat.Chanson = item.Id;
+                    nouvelAchat.Date = DateTime.Now;
+                    db.Achat.Add(nouvelAchat);
+                    db.SaveChanges();
+                }
+            }
+
+            
+
+
+            return Redirect("../Album/Details/" + idAlbum.ToString());
+        }
+
         // GET: Achat
         public ActionResult Index()
         {
