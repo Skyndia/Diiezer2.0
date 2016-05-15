@@ -14,8 +14,6 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
-        
-
         [HttpPost]
         public ActionResult Soumettre(string idMusique, int note, string url)
         {
