@@ -31,7 +31,43 @@
         </dd>
         <dd>
             note : 
-            @Html.DisplayFor(modelItem => Model.note)
+            @{
+                for (int i = 0; i < 5; i++)
+                {
+                    if (i < Model.note)
+                    {
+                        <img src="~/Content/img/fullstar.jpg" style="width:15px;height:15px;">
+                    }
+                    else
+                    {
+                        <img src="~/Content/img/emptystar.jpg" style="width:15px;height:15px;">
+                    }
+                }
+            }
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Soumettre", "Note"))
+                {
+                    <input type="hidden" name="url" value="../Chanson/Details/@Model.idChanson" />
+                    <input type="hidden" name="idMusique" value="@Model.idChanson" />
+
+                    <select name="note">
+
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            if (i == Model.note)
+                            {
+                                <option value=@i selected="selected">@i</option>
+                            }
+                            else
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        }
+                    </select>
+                    <input type="submit" value="Noter" />
+                }
+            }
         </dd>
         @{
             if (Model.isExtract && User.Identity.IsAuthenticated)
