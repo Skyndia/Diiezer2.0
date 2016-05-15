@@ -142,3 +142,15 @@ h4
     width : 70%;
     height : 70%;
 }
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th
+{
+    background-color : rgba(180, 180, 180, 0.5);
+}
+
+.fullStar
+{
+    background: url(~/Content/img/fullstar2.png);
+    width: 15px;
+    height: 15px;
+}
