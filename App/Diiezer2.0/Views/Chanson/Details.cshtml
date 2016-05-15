@@ -25,9 +25,9 @@
             @Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })
         </dd>
         <dd>
-            durée : 
-            @Html.DisplayFor(modelItem => Model.durée)
-            s
+            Durée :
+            @{ var duree = (Model.durée / 60).ToString() + " min " + (Model.durée % 60).ToString();}
+            @duree
         </dd>
         <dd>
             note : 
@@ -37,7 +37,7 @@
             if (Model.isExtract && User.Identity.IsAuthenticated)
             {
                 <dd>Acheter morceaux</dd>
-            } else
+            } else if (User.Identity.IsAuthenticated)
             {
                 <dd>Morceaux acheté</dd>
             }

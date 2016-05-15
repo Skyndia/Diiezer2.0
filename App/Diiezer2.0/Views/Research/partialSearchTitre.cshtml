@@ -31,7 +31,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
+                @Html.ActionLink(item.titre, "../Chanson/Details", new { id = item.idChanson })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.durée)

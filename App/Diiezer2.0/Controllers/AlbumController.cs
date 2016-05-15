@@ -55,7 +55,7 @@ namespace Diiezer.Models
                 foreach (var item2 in notes)
                 {
                     i++;
-                    tmp = tmp + item2.Note1.Value;
+                    tmp = tmp + item2.Note1;
                 }
                 if (i == 0)
                 {
