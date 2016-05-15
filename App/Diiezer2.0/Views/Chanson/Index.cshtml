@@ -33,7 +33,8 @@
             @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.durée)
+            @{ var duree = (item.durée / 60).ToString() + " min " + (item.durée % 60).ToString();}
+            @duree
         </td>
         <td>
             @Html.ActionLink(item.artiste, "../Artiste/Details", new { id = item.idArtiste })
@@ -42,7 +43,19 @@
             @Html.ActionLink(item.album, "../Album/Details", new { id = item.idAlbum })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.note)
+            @{
+                for (int i = 0; i < 5; i++)
+                {
+                    if (i < item.note)
+                    {
+                        <img src="~/Content/img/fullstar.jpg" style="width:15px;height:15px;">
+                    }
+                    else
+                    {
+                        <img src="~/Content/img/emptystar.jpg" style="width:15px;height:15px;">
+                    }
+                }
+            }
         </td>
         @{
             if (item.isExtract && User.Identity.IsAuthenticated)

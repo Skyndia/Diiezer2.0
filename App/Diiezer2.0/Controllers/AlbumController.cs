@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,21 +50,22 @@ namespace Diiezer.Models
 
             foreach (var item in chansons)
             {
-                var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
+                var notes = db.Note.Where(c => c.Chanson1.Id == item.Id).ToList();
                 int i = 0;
                 int tmp = 0;
                 int note;
                 foreach (var item2 in notes)
                 {
                     i++;
+
                     tmp = tmp + item2.Valeur;
+
                 }
                 if (i == 0)
                 {
                     note = 2;
                 }
                 else note = tmp / i;
-
                 string musique;
                 bool isExtract = true;
 
