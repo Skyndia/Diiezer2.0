@@ -29,13 +29,13 @@ namespace Diiezer2._0.Controllers
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
-                currentNote.Note1 = note;
+                currentNote.Valeur = note;
                 db.SaveChanges();
                 
             } else
             {
                 Note nouvelleNote = new Note();
-                nouvelleNote.Note1 = note;
+                nouvelleNote.Valeur = note;
                 nouvelleNote.Chanson = idM;
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
@@ -80,7 +80,7 @@ namespace Diiezer2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Chanson,Utilisateur,Note1")] Note note)
+        public ActionResult Create([Bind(Include = "Id,Chanson,Utilisateur,Valeur")] Note note)
         {
             if (ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace Diiezer2._0.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Chanson,Utilisateur,Note1")] Note note)
+        public ActionResult Edit([Bind(Include = "Id,Chanson,Utilisateur,Valeur")] Note note)
         {
             if (ModelState.IsValid)
             {

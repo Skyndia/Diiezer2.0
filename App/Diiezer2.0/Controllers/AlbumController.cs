@@ -1,4 +1,5 @@
-﻿using Diiezer2._0.Models;
+﻿
+using Diiezer2._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -55,7 +56,7 @@ namespace Diiezer.Models
                 foreach (var item2 in notes)
                 {
                     i++;
-                    tmp = tmp + item2.Note1.Value;
+                    tmp = tmp + item2.Valeur;
                 }
                 if (i == 0)
                 {

@@ -16,8 +16,6 @@ namespace Diiezer2._0.Controllers
         // GET: Research
         public ActionResult Begin()
         {
-
-
             return View();
         }
 
@@ -37,7 +35,7 @@ namespace Diiezer2._0.Controllers
                 foreach (var item2 in notes)
                 {
                     i++;
-                    tmp = tmp + item2.Note1.Value;
+                    tmp = tmp + item2.Valeur;
                 }
                 if (i == 0)
                 {
@@ -80,9 +78,19 @@ namespace Diiezer2._0.Controllers
             List<Artiste> artistes = new List<Artiste>();
 
             String champArtiste = criteres["artiste"];
+            String champGenre = criteres["genre"];
 
             //Requête pour les artistes ici :
             artistes = db.Artiste.Where(a => a.Nom.Contains(champArtiste)).ToList();
+            /*
+            if (champGenre.CompareTo("") != 0)
+            {
+                //une liste d'album correspondant à l'artiste et au genre recherché. 
+                var album = db.Album.Where(a => a.Artiste1.Nom.Contains(champArtiste) && a.Genre1.Nom.Contains(champGenre)).ToList();
+
+                
+            }*/
+            
 
             foreach (var art in artistes)
             {
