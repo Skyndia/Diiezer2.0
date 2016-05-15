@@ -128,12 +128,15 @@ namespace Diiezer.Models
             else musique = chanson.Extrait;
             ViewBag.isExtract = isExtract;
 
+            var comms = db.Commentaire.Where(c => c.IdChanson == id).ToList();
+
             vmChansonInformation info = new vmChansonInformation
             {
                 album = chanson.Album1.Titre,
                 artiste = chanson.Album1.Artiste1.Nom,
                 durée = (int)chanson.Durée,
                 isExtract = isExtract,
+                commentaires = comms,
                 note = note,
                 titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
@@ -147,6 +150,21 @@ namespace Diiezer.Models
                 return HttpNotFound();
             }
             return View(info);
+        }
+
+        [HttpPost]
+        public ActionResult Commenter(string idMusique, string comment, string url)
+        {
+
+            Commentaire comm = new Commentaire();
+            comm.IdChanson = int.Parse(idMusique);
+            comm.Texte = comment;
+            comm.Utilisateur = User.Identity.Name;
+            db.Commentaire.Add(comm);
+            db.SaveChanges();
+            
+
+            return Redirect(url);
         }
 
         // GET: Chanson/Create

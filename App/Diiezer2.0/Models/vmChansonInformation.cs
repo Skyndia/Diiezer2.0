@@ -10,6 +10,7 @@ namespace Diiezer2._0.Models
     {
         public String titre { get; set; }
         public int idChanson { get; set; }
+        public List<Commentaire> commentaires { get; set; }
         public bool isExtract { get; set; }
         public int durée { get; set; }
         public String album { get; set; }

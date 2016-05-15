@@ -3,24 +3,26 @@
 
 
 
-<div>
-    <h4>Achat</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        @{
-            foreach (var item in Model)
-            {
-                <dd>
-                    @item.Chanson1.Titre
-                </dd>
-                <dd>
-                    @item.Chanson1.Album1.Titre
-                </dd>
-                <dd>
-                    @item.Date
-                </dd>
+<div class="container">
+    <div class="row grey-box">
+        <h4>Achat</h4>
+        <hr />
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <h5>@item.Chanson1.Titre</h5>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <h5>@item.Chanson1.Album1.Titre</h5>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <h5>@item.Date.ToString().Substring(0, 10)</h5>
+                        </div>
+                    </div>
+                }
             }
-        }
-    </dl>
+       
+    </div>
 </div>
-
