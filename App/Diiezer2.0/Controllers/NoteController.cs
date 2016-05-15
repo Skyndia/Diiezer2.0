@@ -29,13 +29,13 @@ namespace Diiezer2._0.Controllers
             if (notes.Count()>0)
             {
                 var currentNote = notes.First();
-                currentNote.Note1 = note;
+                currentNote.Valeur = note;
                 db.SaveChanges();
                 
             } else
             {
                 Note nouvelleNote = new Note();
-                nouvelleNote.Note1 = note;
+                nouvelleNote.Valeur = note;
                 nouvelleNote.Chanson = idM;
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);

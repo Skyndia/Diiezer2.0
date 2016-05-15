@@ -37,7 +37,7 @@ namespace Diiezer2._0.Controllers
                 foreach (var item2 in notes)
                 {
                     i++;
-                    tmp = tmp + item2.Note1;
+                    tmp = tmp + item2.Valeur;
                 }
                 if (i == 0)
                 {
