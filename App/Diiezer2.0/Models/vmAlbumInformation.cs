@@ -7,6 +7,7 @@ namespace Diiezer2._0.Models
 {
     public class vmAlbumInformation
     {
+        public int id { get; set; }
         public String nom { get; set; }
         public String artiste { get; set; }
         public int idArtiste { get; set; }

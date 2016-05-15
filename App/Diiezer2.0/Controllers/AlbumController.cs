@@ -93,6 +93,7 @@ namespace Diiezer.Models
 
             vmAlbumInformation albuminfo = new vmAlbumInformation
             {
+                id = album.Id,
                 nom = album.Titre,
                 artiste = album.Artiste1.Nom,
                 idArtiste = album.Artiste1.Id,

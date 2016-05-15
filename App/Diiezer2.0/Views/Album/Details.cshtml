@@ -1,113 +1,132 @@
 ﻿@model Diiezer2._0.Models.vmAlbumInformation
 
 
-<h2>Details</h2>
-
-<div class="row">
-
+    <div class="row">
+        <hr />
         <h4>@Model.nom</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dd>
-                Artiste : @Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })                
-            </dd>
-            <dd>
-                Nombre de musiques : @Model.nombre
-            </dd>
-            <dd>
-                Durée : 
-                @{ var duree = (Model.duree / 60).ToString() + " min " + (Model.duree % 60).ToString();}
-                @duree
-            </dd>
-            <dd>
-                Style : @Model.genre
-            </dd>
-        </dl>
-        <hr />
-        <hr />
-        <h4>Musiques</h4>
-        <hr />
-</div>
+    </div>
 
-<div class="container">
-    <div class="row grey-box">
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
-            @{
-                foreach (var item in Model.chansons)
-                {
-                    <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <h5>@Html.ActionLink(item.titre, "../Chanson/Details", new { id = item.idChanson })</h5>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                            <h5>
-                                <audio src=@item.musique controls class="audio-box"></audio>
-                            </h5>
-                        </div>
-                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">                            
-                            @{
-                                if (!item.isExtract && User.Identity.IsAuthenticated)
-                                {
-                                    <a href=@item.musique download><img src="~/Content/img/download2.png" class="img-responsive"></a>
-                                }
-                            }
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                            @{
-                                for (int i = 0; i < 5; i++)
-                                {
-                                    if (i < item.note)
-                                    {
-                                        <img src="~/Content/img/FullStar2.png" style="width:15px;height:15px;">
-                                    }
-                                    else
-                                    {
-
-                                        <img src="~/Content/img/EmptyStar2.png" style="width:15px;height:15px;">
-                                    }
-                                }
-                            }
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                            @if (Request.IsAuthenticated)
-                            {
-                                using (Html.BeginForm("Soumettre", "Note"))
-                                {
-                                    <input type="hidden" name="url" value="../Album/Details/@item.idAlbum" />
-                                    <input type="hidden" name="idMusique" value="@item.idChanson" />
-
-                                    <select name="note" class="form-control select-note">
-
-                                        @for (int i = 0; i < 6; i++)
-                                        {
-                                            if (i == item.note)
-                                            {
-                                                <option value=@i selected="selected">@i</option>
-                                            }
-                                            else
-                                            {
-                                                <option value=@i>@i</option>
-                                            }
-                                        }
-                                    </select>
-                                    <input type="submit" class="btn btn-info" value="Noter" />
-                                }
-                            }
-
-                        </div>
-                    </div>
-                }
-            }
-        </div>
+<div class="container grey-box">
+    <div class="row" style="padding-top : 1%; padding-bottom : 1%">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-            <img src=@Model.cover style="width:250px;height:250px;">
+            <img src=@Model.cover class="img-responsive">
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered border0">
+                            <tr>
+                                <td>Artiste</td>
+                                <td>@Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })</td>
+                            </tr>
+                            <tr>
+                                <td>Nombre de musiques</td>
+                                <td>@Model.nombre</td>
+                            </tr>
+                            <tr>
+                                <td>Durée</td>
+                                <td>
+                                    @{ var duree = (Model.duree / 60).ToString() + " min " + (Model.duree % 60).ToString();}
+                                    @duree
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Style</td>
+                                <td>@Model.genre</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <button class="btn btn-danger btn-achat">@Html.ActionLink("Acheter l'Album", "../Achat/AcheterAlbum", new { idAlbum = Model.id })</button>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <div class="container">
+        @{
+            foreach (var item in Model.chansons)
+            {
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <h5>@Html.ActionLink(item.titre, "../Chanson/Details", new { id = item.idChanson })</h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                        <h5>
+                            <audio src=@item.musique controls class="audio-box"></audio>
+                        </h5>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                        @{
+                            if (!item.isExtract && User.Identity.IsAuthenticated)
+                            {
+                                <a href=@item.musique download><img src="~/Content/img/download2.png" class="img-responsive btn-dl"></a>
+                            }
+                        }
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                        @{
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (i < item.note)
+                                {
+                                    <img src="~/Content/img/FullStar2.png" style="width:25%;height:25%;">
+                                }
+                                else
+                                {
+
+                                    <img src="~/Content/img/EmptyStar2.png" style="width:25%;height:25%;">
+                                }
+                                // if (i == 3) { <br/>}
+                            }
+                        }
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="vertical-align:auto">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Soumettre", "Note", new { @class = "form-horizontal" }))
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="hidden" name="url" value="../Album/Details/@item.idAlbum" />
+                                        <input type="hidden" name="idMusique" value="@item.idChanson" />
+
+                                        <select name="note" class="form-control select-note">
+
+                                            @for (int i = 0; i < 6; i++)
+                                            {
+                                                if (i == item.note)
+                                                {
+                                                    <option value=@i selected="selected">@i</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value=@i>@i</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <input type="submit" class="btn btn-info btn-note" value="Noter" />
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+                            }
+        }
+    </div>
+
+
+
+    <p>
+        @Html.ActionLink("Retourner à la liste des albums", "Index2")
+    </p>
+
 </div>
-
-
-
-<p>
-    @Html.ActionLink("Retourner à la liste des albums", "Index2")
-</p>
