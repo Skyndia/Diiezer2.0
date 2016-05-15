@@ -23,7 +23,7 @@ namespace Diiezer2._0.Controllers
             int idM = int.Parse(idMusique);
             
 
-            var notes = db.Note.Where(c => c.Chanson1.Id == int.Parse(idMusique) && c.Utilisateur == User.Identity.Name).ToList();
+            var notes = db.Note.Where(c => c.Chanson1.Id == idM && c.Utilisateur == User.Identity.Name).ToList();
 
 
             if (notes.Count()>0)
