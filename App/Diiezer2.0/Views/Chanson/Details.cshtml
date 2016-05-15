@@ -106,7 +106,8 @@
         foreach (var item in Model.commentaires)
         {
             <hr />
-            <h8>@item.Texte</h8>
+            <h6>Posteur : @item.Utilisateur</h6>
+            <h8>Commentaire : @item.Texte</h8>
         }
     }      
 </div>

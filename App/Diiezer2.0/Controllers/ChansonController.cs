@@ -159,6 +159,7 @@ namespace Diiezer.Models
             Commentaire comm = new Commentaire();
             comm.IdChanson = int.Parse(idMusique);
             comm.Texte = comment;
+            comm.Utilisateur = User.Identity.Name;
             db.Commentaire.Add(comm);
             db.SaveChanges();
             
