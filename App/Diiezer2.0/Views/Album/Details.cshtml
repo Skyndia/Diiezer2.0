@@ -81,7 +81,7 @@
                             {
                                 using (Html.BeginForm("Soumettre", "Note"))
                                 {
-                                    <input type="hidden" name="idAlbum" value="@item.idAlbum" />
+                                    <input type="hidden" name="url" value="../Album/Details/@item.idAlbum" />
                                     <input type="hidden" name="idMusique" value="@item.idChanson" />
 
                                     <select name="note" >

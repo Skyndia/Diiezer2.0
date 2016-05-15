@@ -110,6 +110,7 @@ namespace Diiezer.Models
 
                 tmp = tmp + item.Valeur;
 
+
             }
             if (i == 0)
             {

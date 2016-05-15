@@ -56,6 +56,30 @@
                     }
                 }
             }
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Soumettre", "Note"))
+                {
+                    <input type="hidden" name="url" value="../Chanson/Index" />
+                    <input type="hidden" name="idMusique" value="@item.idChanson" />
+
+                    <select name="note">
+
+                        @for (int i = 0; i < 6; i++)
+                        {
+                            if (i == item.note)
+                            {
+                                <option value=@i selected="selected">@i</option>
+                            }
+                            else
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        }
+                    </select>
+                    <input type="submit" value="Noter" />
+                }
+            }
         </td>
         @{
             if (item.isExtract && User.Identity.IsAuthenticated)

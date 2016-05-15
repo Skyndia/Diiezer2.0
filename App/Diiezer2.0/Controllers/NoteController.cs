@@ -17,9 +17,8 @@ namespace Diiezer2._0.Controllers
         
 
         [HttpPost]
-        public ActionResult Soumettre(string idMusique, int note, string idAlbum)
+        public ActionResult Soumettre(string idMusique, int note, string url)
         {
-            int idA = int.Parse(idAlbum);
             int idM = int.Parse(idMusique);
             
 
@@ -42,7 +41,6 @@ namespace Diiezer2._0.Controllers
                 db.SaveChanges();
             }
             
-            string url = "../Album/Details/" + idAlbum;
             return Redirect(url);
         }
 
