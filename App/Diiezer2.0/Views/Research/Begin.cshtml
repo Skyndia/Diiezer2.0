@@ -1,5 +1,7 @@
 ﻿<div class="grey-box">
-    <form class="form-horizontal" name="form1" method="post">
+    <!--<form class="form-horizontal" name="form1" method="post">-->
+    @using (Html.BeginForm("Search", "Research", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
         <div class="form-group">
             <label for="Text" class="col-xs-10 col-sm-6 col-md-1 col-lg-1 col-xl-1 control-label">Artiste</label>
             <div class="col-xs-10 col-sm-6 col-md-3 col-lg-3 col-xl-3">
@@ -37,7 +39,7 @@
                     <option value="note2">2</option>
                     <option value="note3">3</option>
                     <option value="note4">4</option>
-                    <option value="note5">5</option>                 
+                    <option value="note5">5</option>
                 </select>
             </div>
         </div>
@@ -61,8 +63,12 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/Search'; document.form1.submit();" value="Rechercher" />
+                <!--<input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/Search'; document.form1.submit();" value="Rechercher" />-->
+                <input type="submit" class="btn btn-default" value="Rechercher" />
             </div>
         </div>
-    </form>
+    }
+    
+        
+    <!--</form>-->
 </div>

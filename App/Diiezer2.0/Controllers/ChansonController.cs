@@ -37,7 +37,9 @@ namespace Diiezer.Models
                 foreach (var item2 in notes)
                 {
                     i++;
+
                     tmp = tmp + item2.Valeur;
+
                 }
                 if (i == 0)
                 {
@@ -105,7 +107,10 @@ namespace Diiezer.Models
             foreach (var item in notes)
             {
                 i++;
+
                 tmp = tmp + item.Valeur;
+
+
             }
             if (i == 0)
             {

@@ -16,8 +16,6 @@ namespace Diiezer2._0.Controllers
         // GET: Research
         public ActionResult Begin()
         {
-
-
             return View();
         }
 
@@ -37,7 +35,9 @@ namespace Diiezer2._0.Controllers
                 foreach (var item2 in notes)
                 {
                     i++;
+
                     tmp = tmp + item2.Valeur;
+
                 }
                 if (i == 0)
                 {
@@ -73,16 +73,38 @@ namespace Diiezer2._0.Controllers
             return vmChansonInformations;
         }
 
+
+        //Fait la requete sur les albums
+        private List<Album> requeteAlbum(FormCollection criteres)
+        {
+            List<Album> result = new List<Album>();
+            String champAlbum = criteres["album"];
+            String champArtiste = criteres["artiste"];
+            String champGenre = criteres["Genre"];
+
+            //Requête pour les artistes ici :
+            result = db.Album.Where(a => a.Titre.Contains(champAlbum) && (a.Artiste1.Nom.Contains(champArtiste))
+            && a.Genre1.Nom.Contains(champGenre) ).ToList();
+
+            return result;
+        }
+
         //Fait la recherche dans la table des artistes
+        
         private List<vmArtisteCover> requeteArtiste(FormCollection criteres)
         {
             List<vmArtisteCover> result = new List<vmArtisteCover>();
             List<Artiste> artistes = new List<Artiste>();
+            List<Album> albums = new List<Album>();
 
-            String champArtiste = criteres["artiste"];
+            //On prend les albums qui correspondent à la requete
+            albums = requeteAlbum(criteres);
 
-            //Requête pour les artistes ici :
-            artistes = db.Artiste.Where(a => a.Nom.Contains(champArtiste)).ToList();
+            //Puis on en extrait les artistes
+            foreach (var alb in albums)
+            {
+                if (!artistes.Contains(alb.Artiste1)) artistes.Add(alb.Artiste1);
+            }
 
             foreach (var art in artistes)
             {
@@ -98,27 +120,16 @@ namespace Diiezer2._0.Controllers
             return result;
         }
 
-        //Fait la requete sur les albums
-        private List<Album> requeteAlbum(FormCollection criteres)
-        {
-            List<Album> result = new List<Album>();
-            String champAlbum = criteres["album"];
-
-            //Requête pour les artistes ici :
-            result = db.Album.Where(a => a.Titre.Contains(champAlbum)).ToList();
-
-            return result;
-        }
-
         //fait la requete sur les chansons
         private List<vmChansonInformation> requeteChanson(FormCollection criteres)
         {
             List<vmChansonInformation> result = new List<vmChansonInformation>();
             String champTitre = criteres["titre"];
+            String champGenre = criteres["genre"];
             List<Chanson> chansons = new List<Chanson>();
 
             //Requête pour les artistes ici :
-            chansons = db.Chanson.Include(c => c.Album1).Where(a => a.Titre.Contains(champTitre)).ToList();
+            chansons = db.Chanson.Include(c => c.Album1).Where(a => a.Titre.Contains(champTitre) && a.Album1.Genre1.Nom.Contains(champGenre)).ToList();
 
 
             result = getVm(chansons);
