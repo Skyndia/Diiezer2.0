@@ -101,9 +101,9 @@ namespace Diiezer2._0.Models
                 cover = album.Cover,
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
-                genre = album.Genre1.Nom
+                genre = album.Genre1.Nom,
+                note = (int)album.Note //la note est de type double dans la DB
             };
-            albuminfo.noterAlbum(albuminfo.chansons); //note l'album
       
             return View(albuminfo);
         }

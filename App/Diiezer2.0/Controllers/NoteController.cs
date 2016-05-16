@@ -21,25 +21,46 @@ namespace Diiezer2._0.Controllers
 
 
             var notes = db.Note.Where(c => c.Chanson1.Id == idM && c.Utilisateur == User.Identity.Name).ToList();
-
-
+            int ancienneNoteChanson = 0;
+            //Si il y avait déjà une note
             if (notes.Count() > 0)
             {
                 var currentNote = notes.First();
-                currentNote.Valeur = note;
-                db.SaveChanges();
-
+                ancienneNoteChanson = currentNote.Valeur; //Save qui servira pour noter l'album
+                currentNote.Valeur = note;              
             }
-            else
+            else//Si on ajoute une nouvelle note
             {
                 Note nouvelleNote = new Note();
                 nouvelleNote.Valeur = note;
                 nouvelleNote.Chanson = idM;
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
-                db.SaveChanges();
             }
 
+            //Update de la note de l'album correspondant :
+
+            var chanson = db.Chanson.Where(c => c.Id == idM).First();
+            var album = chanson.Album1;
+
+            double ancienneNoteAlbum = album.Note;
+            int nbNote;
+            double newNote;
+
+            if (notes.Count() > 0) //Si il y avait déjà une note
+            {
+                nbNote = album.NbNote;
+                newNote = (ancienneNoteAlbum * nbNote - ancienneNoteChanson + note) / nbNote;
+            }
+            else
+            {
+                nbNote = album.NbNote + 1;
+                newNote = (ancienneNoteAlbum * nbNote + note) / nbNote;
+            }
+            album.Note = newNote;
+            album.NbNote = nbNote;
+
+            db.SaveChanges();
             return Redirect(url);
         }
 
