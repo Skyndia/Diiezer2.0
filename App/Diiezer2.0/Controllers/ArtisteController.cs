@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Diiezer.Models
+namespace Diiezer2._0.Models
 {
     public class ArtisteController : Controller
     {

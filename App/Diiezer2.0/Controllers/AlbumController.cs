@@ -10,7 +10,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Diiezer.Models
+namespace Diiezer2._0.Models
 {
     public class AlbumController : Controller
     {
@@ -103,10 +103,8 @@ namespace Diiezer.Models
                 nombre = (int)album.NbChanson,
                 genre = album.Genre1.Nom
             };
-               
+            albuminfo.noterAlbum(albuminfo.chansons); //note l'album
       
-
-
             return View(albuminfo);
         }
 

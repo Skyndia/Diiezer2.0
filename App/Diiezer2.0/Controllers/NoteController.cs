@@ -14,33 +14,6 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
-        [HttpPost]
-        public ActionResult Soumettre(string idMusique, int note, string url)
-        {
-            int idM = int.Parse(idMusique);
-            
-
-            var notes = db.Note.Where(c => c.Chanson1.Id == idM && c.Utilisateur == User.Identity.Name).ToList();
-
-
-            if (notes.Count()>0)
-            {
-                var currentNote = notes.First();
-                currentNote.Valeur = note;
-                db.SaveChanges();
-                
-            } else
-            {
-                Note nouvelleNote = new Note();
-                nouvelleNote.Valeur = note;
-                nouvelleNote.Chanson = idM;
-                nouvelleNote.Utilisateur = User.Identity.Name;
-                db.Note.Add(nouvelleNote);
-                db.SaveChanges();
-            }
-            
-            return Redirect(url);
-        }
         //Permet de noter en cliquant sur les étoiles
         public ActionResult Noter(string idMusique, int note, string url)
         {
@@ -69,6 +42,24 @@ namespace Diiezer2._0.Controllers
 
             return Redirect(url);
         }
+
+
+        public int noterAlbum(List<vmChansonInformation> vmChansons)
+        {
+            int result = 0;
+            int somme = 0, cpt = 0;
+            foreach (var item in vmChansons)
+            {
+                somme += item.note;
+            }
+            if (cpt == 0) result = 0;
+            else result = somme / cpt;
+
+            return result;
+        }
+
+
+
 
         // GET: Note
         public ActionResult Index()

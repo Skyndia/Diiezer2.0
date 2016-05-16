@@ -16,7 +16,19 @@ namespace Diiezer2._0.Models
         public int duree { get; set; }
         public string genre { get; set; }
         public String cover { get; set; }
+        public int note { get; set; }
+
+        //note l'album en moyenne
+        public void noterAlbum(List<vmChansonInformation> vmChansons)
+        {
+            int somme = 0, cpt = 0;
+            foreach (var item in vmChansons)
+            {
+                somme += item.note;
+                cpt++;
+            }
+            if (cpt == 0) note = 0;
+            else note = somme / cpt;
+        }
     }
-
-
 }
