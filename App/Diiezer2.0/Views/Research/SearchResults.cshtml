@@ -15,7 +15,7 @@
 
     if ((ViewBag.but.CompareTo("SearchAlbums") == 0) || (ViewBag.but.CompareTo("SearchAll") == 0))
     {
-        if ((Model.albums != null)&&(Model.albums.Count > 0))
+        if ((Model.albums != null) && (Model.albums.Count > 0))
         {
             Html.RenderPartial("partialSearchAlbum", Model.albums);
         }
@@ -31,9 +31,13 @@
         }
     }
 
-    if (Model.albums.Count + Model.artistes.Count + Model.chansons.Count < 1)
+    if ((Model.albums == null || Model.albums.Count < 1) &&
+        (Model.chansons == null || Model.chansons.Count < 1) &&
+        (Model.artistes == null || Model.artistes.Count < 1))
     {
-        <p>Malheureusement, en tant que humble moteur de recherche je ne suis point très versé dans l'art abstrait.
-        Votre recherche n'a rien donné, veuillez être plus explicite.</p>
+        <p>
+            Malheureusement, en tant que humble moteur de recherche je ne suis point très versé dans l'art abstrait.
+            Votre recherche n'a rien donné, veuillez être plus explicite.
+        </p>
     }
 }
