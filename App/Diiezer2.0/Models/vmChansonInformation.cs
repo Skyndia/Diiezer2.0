@@ -19,5 +19,6 @@ namespace Diiezer2._0.Models
         public String artiste { get; set; }
         public int idArtiste { get; set; }
         public String musique { get; set; }
+        public double prix { get; set; }
     }
 }

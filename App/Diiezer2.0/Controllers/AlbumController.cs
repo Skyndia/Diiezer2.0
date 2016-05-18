@@ -87,7 +87,8 @@ namespace Diiezer2._0.Models
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
-                    musique = musique
+                    musique = musique,
+                    prix = (double)item.Prix / 100.0
                 });
             }
             //Je veux arrondir album.note---------
@@ -107,7 +108,8 @@ namespace Diiezer2._0.Models
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
                 genre = album.Genre1.Nom,
-                note = noteArrondie //la note est de type double dans la DB
+                note = noteArrondie, //la note est de type double dans la DB
+                prix = album.Prix / 100.0
             };
       
             return View(albuminfo);

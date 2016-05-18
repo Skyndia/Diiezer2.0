@@ -49,7 +49,8 @@ namespace Diiezer2._0.Models
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
-                    musique = musique
+                    musique = musique,
+                    prix = (double)item.Prix / 100.0
                 });
             }
             int NbChansonsParPage = 20;
@@ -110,8 +111,9 @@ namespace Diiezer2._0.Models
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,
                 idChanson = chanson.Id,
-                musique = musique
-            };
+                musique = musique,
+                prix = (double)chanson.Prix / 100.0
+        };
 
             if (chanson == null)
             {
