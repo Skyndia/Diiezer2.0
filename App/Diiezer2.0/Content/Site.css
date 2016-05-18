@@ -28,6 +28,12 @@ textarea {
 }
 
 .grey-box{
+    background-color : rgba(128, 128, 128, 0.9);
+    color : white;
+    padding : 10px;
+}
+
+.grey-box2{
     background-color : rgba(128, 128, 128, 0.5);
     color : white;
     padding : 10px;
