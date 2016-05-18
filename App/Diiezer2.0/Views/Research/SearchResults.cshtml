@@ -7,7 +7,11 @@
     {
         if ((Model.artistes != null) && (Model.artistes.Count > 0))
         {
-            Html.RenderPartial("partialSearchArtiste", Model.artistes);
+            <hr />
+            <h2>Artistes</h2>
+            <hr />
+            Html.RenderPartial("../Artiste/IndexPartial", Model.artistes);
+            <hr />
         }
     }
 
@@ -17,7 +21,10 @@
     {
         if ((Model.albums != null) && (Model.albums.Count > 0))
         {
-            Html.RenderPartial("partialSearchAlbum", Model.albums);
+            <h2>Albums</h2>
+            <hr />
+            Html.RenderPartial("../Album/IndexPartial", Model.albums);
+            <hr />
         }
     }
 
@@ -27,7 +34,10 @@
     {
         if ((Model.chansons != null) && (Model.chansons.Count > 0))
         {
-            Html.RenderPartial("partialSearchTitre", Model.chansons);
+            <h2>Chansons</h2>
+            <hr />
+            Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
+            <hr />
         }
     }
 
