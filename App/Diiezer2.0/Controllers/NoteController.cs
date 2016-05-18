@@ -22,6 +22,7 @@ namespace Diiezer2._0.Controllers
 
             var notes = db.Note.Where(c => c.Chanson1.Id == idM && c.Utilisateur == User.Identity.Name).ToList();
             int ancienneNoteChanson = 0;
+            //Update de la table note
             //Si il y avait déjà une note
             if (notes.Count() > 0)
             {
@@ -37,50 +38,53 @@ namespace Diiezer2._0.Controllers
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
             }
-
-            //Update de la note de l'album correspondant :
-
+            //Update de la note de la chanson (dans la table chanson)
             var chanson = db.Chanson.Where(c => c.Id == idM).First();
-            var album = chanson.Album1;
 
-            double ancienneNoteAlbum = album.Note;
-            int nbNote;
-            double newNote;
+            double ancienneNote = chanson.Note;
+            int nbNoteChanson;
+            double newNoteChanson;
 
             if (notes.Count() > 0) //Si il y avait déjà une note
             {
-                nbNote = album.NbNote;
-                newNote = (ancienneNoteAlbum * nbNote - ancienneNoteChanson + note) / nbNote;
+                nbNoteChanson = chanson.NbNote;
+                newNoteChanson = (ancienneNote * nbNoteChanson - ancienneNoteChanson + note) / nbNoteChanson;
             }
             else
             {
-                nbNote = album.NbNote + 1;
-                newNote = (ancienneNoteAlbum * nbNote + note) / nbNote;
+                nbNoteChanson = chanson.NbNote + 1;
+                newNoteChanson = (ancienneNote * nbNoteChanson + note) / nbNoteChanson;
             }
-            album.Note = newNote;
-            album.NbNote = nbNote;
+
+            if (chanson.NbNote == 0) // Si la chanson n'avait pas encore été notée
+            {
+                chanson.Note = note;
+                chanson.NbNote = 1;
+            }
+            else
+            {
+                chanson.Note = newNoteChanson;
+                chanson.NbNote = nbNoteChanson;
+            }
+            
+
+            //Update de la note de l'album correspondant :
+
+
+            var album = chanson.Album1;
+            var chansons = db.Chanson.Where(c => c.Album1.Id == album.Id).ToList();
+
+            double somme = 0;
+            foreach (var item in chansons)
+            {
+                somme += item.Note;
+            }
+            album.Note = somme / (double)album.NbChanson;
+            
 
             db.SaveChanges();
             return Redirect(url);
         }
-
-
-        public int noterAlbum(List<vmChansonInformation> vmChansons)
-        {
-            int result = 0;
-            int somme = 0, cpt = 0;
-            foreach (var item in vmChansons)
-            {
-                somme += item.note;
-            }
-            if (cpt == 0) result = 0;
-            else result = somme / cpt;
-
-            return result;
-        }
-
-
-
 
         // GET: Note
         public ActionResult Index()

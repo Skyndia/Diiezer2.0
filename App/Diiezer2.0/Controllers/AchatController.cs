@@ -69,8 +69,9 @@ namespace Diiezer2._0.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var achats = db.Achat.Where(c=>c.Utilisateur == User.Identity.Name).Reverse();
+            List<Achat> achats = new List<Achat>();
+            achats = db.Achat.Where(c=>c.Utilisateur == User.Identity.Name).ToList();
+            achats.Reverse();
 
             return View(achats);
         }
