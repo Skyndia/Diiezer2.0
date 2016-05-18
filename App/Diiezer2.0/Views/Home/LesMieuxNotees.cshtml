@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<Diiezer2._0.Models.vmChansonInformation>
 
-<div class="grey-box container">
+<div class="container grey-box">
     <div class="row">
-       <h3>Les musiques qui ont étées le mieux notées jusqu'à aujourd'hui : </h3>
+        <div class="col-md-12">
+            <h3>Les musiques qui ont étées le mieux notées jusqu'à aujourd'hui : </h3>
+        </div>
     </div>
     <div class="row">
-        @{
-            Html.RenderPartial("../Chanson/IndexPartial", Model);
-        }
+        <div class="col-md-12">
+            @{
+                Html.RenderPartial("../Chanson/IndexPartial", Model);
+            }
+        </div>
     </div>
 </div>
 
