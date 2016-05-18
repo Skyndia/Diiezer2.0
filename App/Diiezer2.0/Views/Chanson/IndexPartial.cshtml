@@ -31,7 +31,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
+                <a href="/Chanson/Details/@item.idChanson">@item.titre</a>
             </td>
             <td>
                 @{ var duree = (item.durée / 60).ToString() + " min " + (item.durée % 60).ToString();}
