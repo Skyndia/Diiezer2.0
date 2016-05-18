@@ -24,7 +24,9 @@
         <th>
             Note
         </th>
-        <th></th>
+        <th>
+            Prix
+        </th>
     </tr>
     
 @foreach (var item in Model) {
@@ -83,9 +85,13 @@
         </td>
         <td>
             @{
-                if (item.isExtract && User.Identity.IsAuthenticated)
+                if (item.isExtract)
                 {
-                    <p>Acheter morceaux</p>
+                    <p>@item.prix &euro; </p>
+                }
+                else 
+                {
+                    <p>Possédée</p>
                 }
             }
         </td>

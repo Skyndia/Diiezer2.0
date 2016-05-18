@@ -36,7 +36,7 @@
 }
 
 @{
-    var reste = Model.Count() - Model.Count() / 3;
+    var reste = Model.Count()%3;
     var quotient = Model.Count() / 3;
     if (reste == 0)
     {
