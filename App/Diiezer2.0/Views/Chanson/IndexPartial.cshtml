@@ -8,22 +8,22 @@
 <table class="table grey-box table-bordered border0 table-striped">
     <tr>
         <th>
-            Titre
+            @Html.ActionLink("Titre", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "titre" })
         </th>
         <th>
-            Durée
+            @Html.ActionLink("Durée", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "duree" })
         </th>
         <th>
-            Artiste
+            @Html.ActionLink("Artiste", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "artiste" })
         </th>
         <th>
-            Album
+            @Html.ActionLink("Album", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "album" })
         </th>
         <th>
-            Note
+            @Html.ActionLink("Note", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "note" })
         </th>
         <th>
-            Prix
+            @Html.ActionLink("Prix", "../"+HttpContext.Current.Request.Url.AbsolutePath, new { tri = "prix" })
         </th>
     </tr>
 
@@ -53,13 +53,13 @@
                         j = i + 1;
                         if (i < item.note)
                         {
-                            <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Chanson/Index">
+                            <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=@HttpContext.Current.Request.Url.AbsoluteUri">
                                 <img src="~/Content/img/fullstar2.png" style="width:15px;height:15px;">
                             </a>
                         }
                         else
                         {
-                            <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Chanson/Index">
+                            <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=@HttpContext.Current.Request.Url.AbsoluteUri">
                                 <img src="~/Content/img/emptystar2.png" style="width:15px;height:15px;">
                             </a>
                         }
