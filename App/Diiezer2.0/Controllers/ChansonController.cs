@@ -30,24 +30,27 @@ namespace Diiezer2._0.Models
             return View(vmChansonInformations);
         }
 
-        private List<vmChansonInformation> getvmChansonInformations(int? id, string tri)
+        public List<vmChansonInformation> getvmChansonInformations(int? id, string tri)
         {
             ViewBag.Tri = tri;
-            string user = User.Identity.Name;
+            
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
 
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
             {
-                string musique;
+                string musique = item.Extrait;
                 bool isExtract = true;
-
-                if (db.Achat.Where(c => c.Chanson1.Id == item.Id && c.Utilisateur == user).ToList().Count() >= 1)
+                if (User.Identity.IsAuthenticated)
                 {
-                    musique = item.Musique;
-                    isExtract = false;
+                    string user = User.Identity.Name;
+                    if (db.Achat.Where(c => c.Chanson1.Id == item.Id && c.Utilisateur == user).ToList().Count() >= 1)
+                    {
+                        musique = item.Musique;
+                        isExtract = false;
+                    }
                 }
-                else musique = item.Extrait;
+          
 
                 vmChansonInformations.Add(new vmChansonInformation
                 {

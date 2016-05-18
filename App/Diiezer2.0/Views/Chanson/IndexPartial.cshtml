@@ -8,7 +8,7 @@
 <table class="table grey-box table-bordered border0 table-striped">
     <tr>
         <th>
-            Titre
+            @Html.ActionLink("Titre", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "titre" })
         </th>
         <th>
             @Html.ActionLink("Durée", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "duree" })
