@@ -10,6 +10,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Diiezer2._0.Models
 {
     public class AlbumController : Controller
@@ -80,6 +81,40 @@ namespace Diiezer2._0.Models
             double partieDecimale = album.Note - Math.Floor(album.Note);
             int noteArrondie = (int)(Math.Floor(album.Note));
             if (partieDecimale > 0.5) noteArrondie += 1;
+
+            //----------------------------------
+            //Construction d'une liste pour le lecteur
+            int compteur = 0;
+            List<titrePourLecteur> listLecteur = new List<titrePourLecteur>();
+            foreach (var item in chansons)
+            {
+                compteur++;
+
+                string musique;
+
+                if (db.Achat.Where(c => c.Chanson1.Id == item.Id && c.Utilisateur == user).ToList().Count() >= 1)
+                {
+                    musique = item.Musique;
+                }
+                else musique = item.Extrait;
+
+                titrePourLecteur obj = new titrePourLecteur
+                {
+                    track = "\"" + compteur.ToString() + "\"",
+                    name = "\"" + item.Titre + "\"",
+                    length = "\"" + (item.Durée / 60).ToString() + ":" + (item.Durée % 60).ToString() + "\"",
+                    file = "\"" + musique.Remove(musique.Count() - 4) + "\""
+                };
+                listLecteur.Add(obj);
+            }
+            string listLecteurString = "[";
+            foreach (var item in listLecteur)
+            {
+                listLecteurString += item.toString() + ",";
+            }
+            listLecteurString = listLecteurString.Remove(listLecteurString.Count() - 1);
+            listLecteurString += "]";
+            
             
             //------------------------------------
             vmAlbumInformation albuminfo = new vmAlbumInformation
@@ -95,7 +130,8 @@ namespace Diiezer2._0.Models
                 genre = album.Genre1.Nom,
                 note = noteArrondie, //la note est de type double dans la DB
                 prix = album.Prix / 100.0,
-                date = album.Date.ToString().Substring(0, 10)
+                date = album.Date.ToString().Substring(0, 10),
+                toto = listLecteurString
             };
       
             return View(albuminfo);

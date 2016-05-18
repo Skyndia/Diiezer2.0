@@ -15,7 +15,7 @@
         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <table class="table table-responsive table-hover table-bordered border0">
+                        <table class="table table-responsive table-hover table-bordered border0 prez-album">
                             <tr>
                                 <td>Artiste</td>
                                 <td>@Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })</td>
@@ -47,11 +47,11 @@
                                         {
                                             if (i < Model.note)
                                             {
-                                                <img src="~/Content/img/FullStar2.png" style="width:5%;height:auto">
+                                                <img src="~/Content/img/FullStar2.png" style="width:10%;height:auto">
                                             }
                                             else
                                             {
-                                                <img src="~/Content/img/EmptyStar2.png" style="width:5%;height:auto">
+                                                <img src="~/Content/img/EmptyStar2.png" style="width:10%;height:auto">
                                             }
                                         }
                                     }
@@ -75,83 +75,13 @@
         </div>
     </div>
 
-    <div class="container">
-        @{
-            foreach (var item in Model.chansons)
-            {
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 col-xl-3">
-                        <h5>@Html.ActionLink(item.titre, "../Chanson/Details", new { id = item.idChanson })</h5>
-                    </div>
-                    <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 col-xl-4">
-                        <h5>
-                            <audio src=@item.musique controls class="audio-box"></audio>
-                        </h5>
-                    </div>
-                    <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1 col-xl-1">
-                        @{
-                            if (!item.isExtract && User.Identity.IsAuthenticated)
-                            {
-                                <a href=@item.musique download><img src="~/Content/img/download2.png" class="img-responsive btn-dl"></a>
-                            }
-                        }
-                    </div>
-                    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 col-xl-2">
-                        @{
-                            if (Request.IsAuthenticated)
-                            {
-                                int j;
-                                for (int i = 0; i < 5; i++)
-                                {
-                                    j = i + 1;
-                                    if (i < item.note)
-                                    {
-                                        <a href="../../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Album/Details/@item.idAlbum">
-                                            <img src="~/Content/img/fullstar2.png" style="width:10%;height:auto;margin-top:5%">
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="../../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Album/Details/@item.idAlbum">
-                                            <img src="~/Content/img/emptystar2.png" style="width:10%;height:auto;margin-top:5%">
-                                        </a>
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                for (int i = 0; i < 5; i++)
-                                {
-                                    if (i < item.note)
-                                    {
-                                        <img src="~/Content/img/FullStar2.png" style="width:10%;height:10%;margin-top:5%">
-                                    }
-                                    else
-                                    {
+    @{
+        Html.RenderPartial("partialLecteur", Model);
+    }
 
-                                        <img src="~/Content/img/EmptyStar2.png" style="width:10%;height:10%;margin-top:5%">
-                                    }
-                                }
-                            }
-                        }
-                    </div>
-                    <div class="col-xs-2 col-sm-6 col-md-2 col-lg-2 col-xl-2">
-                        @if (Request.IsAuthenticated)
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
-
-                    </div>
-                </div>
-            }
-        }
-    </div>
-
-
+    @{ 
+        Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
+    }
 
     <p>
         @Html.ActionLink("Retourner à la liste des albums", "Index2")

@@ -118,6 +118,7 @@ a:hover
  .border0 > tbody > tr > td
 {
     border: 0px;
+   
 }
 
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th
@@ -158,4 +159,9 @@ h4
 .blue-link
 {
     color: blue;
+}
+
+.prez-album >tbody > tr > td
+{
+    width : 50%;
 }

@@ -19,6 +19,7 @@ namespace Diiezer2._0.Models
         public String cover { get; set; }
         public int note { get; set; }
         public double prix { get; set; }
+        public string toto { get; set; }
 
         //note l'album en moyenne
         public void noterAlbum(List<vmChansonInformation> vmChansons)
