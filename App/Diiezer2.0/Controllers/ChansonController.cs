@@ -30,23 +30,6 @@ namespace Diiezer2._0.Models
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
             {
-                var notes = db.Note.Where(c => c.Chanson1.Id == item.Id).ToList();
-                int i = 0;
-                int tmp = 0;
-                int note;
-                foreach (var item2 in notes)
-                {
-                    i++;
-
-                    tmp = tmp + item2.Valeur;
-
-                }
-                if (i == 0)
-                {
-                    note = 2;
-                }
-                else note = tmp / i;
-
                 string musique;
                 bool isExtract = true;
 
@@ -61,7 +44,7 @@ namespace Diiezer2._0.Models
                     isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
-                    note = note,
+                    note = (int)item.Note,
                     titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
@@ -100,23 +83,7 @@ namespace Diiezer2._0.Models
             }
             Chanson chanson = db.Chanson.Find(id);
             string user = User.Identity.Name;
-            var notes = db.Note.Where(c => c.Chanson1.Id == id).ToList();
-            int i = 0;
-            int tmp = 0;
-            int note;
-            foreach (var item in notes)
-            {
-                i++;
-
-                tmp = tmp + item.Valeur;
-
-
-            }
-            if (i == 0)
-            {
-                note = 2;
-            }
-            else note = tmp / i;
+            
             bool isExtract = true;
             string musique;
 
@@ -129,6 +96,7 @@ namespace Diiezer2._0.Models
             ViewBag.isExtract = isExtract;
 
             var comms = db.Commentaire.Where(c => c.IdChanson == id).ToList();
+            comms.Reverse();
 
             vmChansonInformation info = new vmChansonInformation
             {
@@ -137,7 +105,7 @@ namespace Diiezer2._0.Models
                 durée = (int)chanson.Durée,
                 isExtract = isExtract,
                 commentaires = comms,
-                note = note,
+                note = (int)chanson.Note,
                 titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,
