@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Diiezer2._0.Models.vmArtisteCover>
+﻿
+@model IEnumerable<Diiezer2._0.Models.vmArtisteCover>
 
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "IndexPartial";
 }
 
-<h2>Artistes</h2>
 @for (int i = 0; i < Model.Count() / 3; i++)
 {
     <div class="row">
@@ -35,7 +35,7 @@
     </div>
 }
 @{
-    var reste = Model.Count()%3;
+    var reste = Model.Count() % 3;
     var quotient = Model.Count() / 3;
     if (reste == 0)
     {
@@ -79,4 +79,3 @@
         }
     }
 }
-

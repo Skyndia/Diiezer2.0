@@ -6,100 +6,10 @@
 
 
 <h2>Page @ViewBag.page</h2>
-
-<table class="table grey-box table-bordered border0 table-striped">
-    <tr>
-        <th>
-            Titre
-        </th>
-        <th>
-            Durée
-        </th>
-        <th>
-            Artiste
-        </th>
-        <th>
-            Album
-        </th>
-        <th>
-            Note
-        </th>
-        <th>
-            Prix
-        </th>
-    </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.titre, "Details", new { id = item.idChanson })
-        </td>
-        <td>
-            @{ var duree = (item.durée / 60).ToString() + " min " + (item.durée % 60).ToString();}
-            @duree
-        </td>
-        <td>
-            @Html.ActionLink(item.artiste, "../Artiste/Details", new { id = item.idArtiste })
-        </td>
-        <td>
-            @Html.ActionLink(item.album, "../Album/Details", new { id = item.idAlbum })
-        </td>
-        <td>
-
-            @if (Request.IsAuthenticated)
-            {
-                int j;
-                for (int i = 0; i < 5; i++)
-                {
-                    j = i + 1;
-                    if (i < item.note)
-                    {
-                        <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Chanson/Index">
-                            <img src="~/Content/img/fullstar2.png" style="width:15px;height:15px;">
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Chanson/Index">
-                            <img src="~/Content/img/emptystar2.png" style="width:15px;height:15px;">
-                        </a>
-                    }
-                }
-            }
-            else
-            {
-                int j;
-                for (int i = 0; i < 5; i++)
-                {
-                    j = i + 1;
-                    if (i < item.note)
-                    {
-                        <img src="~/Content/img/fullstar2.png" style="width:15px;height:15px;">
-                    }
-                    else
-                    {
-                        <img src="~/Content/img/emptystar2.png" style="width:15px;height:15px;">
-                    }
-                }
-            }
-        </td>
-        <td>
-            @{
-                if (item.isExtract)
-                {
-                    <p>@item.prix &euro; </p>
-                }
-                else 
-                {
-                    <p>Possédée</p>
-                }
-            }
-        </td>
-        
-    </tr>
+@{ 
+    Html.RenderPartial("IndexPartial", Model);
 }
 
-</table>
 
 
 <!-- Pagination -->
