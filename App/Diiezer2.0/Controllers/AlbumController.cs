@@ -90,7 +90,12 @@ namespace Diiezer2._0.Models
                     musique = musique
                 });
             }
-
+            //Je veux arrondir album.note---------
+            double partieDecimale = album.Note - Math.Floor(album.Note);
+            int noteArrondie = (int)(Math.Floor(album.Note));
+            if (partieDecimale > 0.5) noteArrondie += 1;
+            
+            //------------------------------------
             vmAlbumInformation albuminfo = new vmAlbumInformation
             {
                 id = album.Id,
@@ -102,7 +107,7 @@ namespace Diiezer2._0.Models
                 duree = (int)album.Durée,
                 nombre = (int)album.NbChanson,
                 genre = album.Genre1.Nom,
-                note = (int)album.Note //la note est de type double dans la DB
+                note = noteArrondie //la note est de type double dans la DB
             };
       
             return View(albuminfo);
