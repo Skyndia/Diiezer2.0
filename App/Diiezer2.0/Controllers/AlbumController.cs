@@ -50,22 +50,7 @@ namespace Diiezer2._0.Models
 
             foreach (var item in chansons)
             {
-                var notes = db.Note.Where(c => c.Chanson1.Id == item.Id).ToList();
-                int i = 0;
-                int tmp = 0;
-                int note;
-                foreach (var item2 in notes)
-                {
-                    i++;
-
-                    tmp = tmp + item2.Valeur;
-
-                }
-                if (i == 0)
-                {
-                    note = 2;
-                }
-                else note = tmp / i;
+               
                 string musique;
                 bool isExtract = true;
 
@@ -82,7 +67,7 @@ namespace Diiezer2._0.Models
                     isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
-                    note = note,
+                    note = (int)item.Note,
                     titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
