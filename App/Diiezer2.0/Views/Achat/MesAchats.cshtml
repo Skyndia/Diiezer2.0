@@ -12,10 +12,10 @@
                 {
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                            <h5>@item.Chanson1.Titre</h5>
+                            <h5><a href="/Chanson/Details/@item.Chanson1.Id">@item.Chanson1.Titre</a> </h5>
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
-                            <h5>@item.Chanson1.Album1.Titre</h5>
+                            <h5><a href="/Chanson/Details/@item.Chanson1.Album1.Id">  @item.Chanson1.Album1.Titre</a></h5>
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
                             <h5>@item.Date.ToString().Substring(0, 10)</h5>

@@ -15,17 +15,26 @@ namespace Diiezer2._0.Models
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
         // GET: Chanson/Index/5
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id, string tri)
         {
             if (id == null)
             {
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 id = 1;
             }
-            string user = User.Identity.Name;
-
-            List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
             
+
+            List<vmChansonInformation> vmChansonInformations =  this.getvmChansonInformations((int)id, tri);
+
+
+            return View(vmChansonInformations);
+        }
+
+        private List<vmChansonInformation> getvmChansonInformations(int? id, string tri)
+        {
+            ViewBag.Tri = tri;
+            string user = User.Identity.Name;
+            List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
 
             var chansons = db.Chanson.Include(c => c.Album1).ToList();
             foreach (var item in chansons)
@@ -33,13 +42,15 @@ namespace Diiezer2._0.Models
                 string musique;
                 bool isExtract = true;
 
-                if (db.Achat.Where(c=>c.Chanson1.Id == item.Id && c.Utilisateur == user ).ToList().Count() >= 1)
+                if (db.Achat.Where(c => c.Chanson1.Id == item.Id && c.Utilisateur == user).ToList().Count() >= 1)
                 {
                     musique = item.Musique;
                     isExtract = false;
-                } else musique = item.Extrait;
+                }
+                else musique = item.Extrait;
 
-                vmChansonInformations.Add(new vmChansonInformation {
+                vmChansonInformations.Add(new vmChansonInformation
+                {
                     album = item.Album1.Titre,
                     isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
@@ -70,9 +81,37 @@ namespace Diiezer2._0.Models
             int max = NbChansonsParPage;
             if (NbChansonsParPage > n - NbChansonsParPage * (id.Value - 1)) max = n - NbChansonsParPage * (id.Value - 1);
 
+            if (tri == "note")
+            {
+                vmChansonInformations.Sort((x, y) => x.note.CompareTo(y.note));
+                vmChansonInformations.Reverse();
+            }
+            else if (tri == "album")
+            {
+                vmChansonInformations.Sort((x, y) => x.album.CompareTo(y.album));
+            }
+            else if (tri =="artiste")
+            {
+                vmChansonInformations.Sort((x, y) => x.artiste.CompareTo(y.artiste));
+            }
+            else if (tri == "duree")
+            {
+                vmChansonInformations.Sort((x, y) => x.durée.CompareTo(y.durée));
+                vmChansonInformations.Reverse();
+            }
+            else if (tri == "prix")
+            {
+                vmChansonInformations.Sort((x, y) => x.prix.CompareTo(y.prix));
+            }
+            else
+            {
+                vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
+            }
+            
 
-            vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
-            return View(vmChansonInformations.Skip(20 * (id.Value - 1)).Take(max));
+            vmChansonInformations.Skip(20 * (id.Value - 1)).Take(max);
+
+            return vmChansonInformations;
         }
 
         // GET: Chanson/Details/5
@@ -120,6 +159,15 @@ namespace Diiezer2._0.Models
                 return HttpNotFound();
             }
             return View(info);
+        }
+
+        public ActionResult TriNote( List<vmChansonInformation> chansons, string url)
+        {
+            chansons.Sort((x, y) => x.note.CompareTo(y.note));
+            chansons.Reverse();
+            
+
+            return View(url,chansons);
         }
 
         [HttpPost]
