@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Diiezer2._0.Models.Album>
+
+<div class="grey-box container">
+    <div class="row">
+        <h3>Les derniers Albums sortis à ce jour : </h3>
+    </div>
+    <div class="row">
+        @{
+            Html.RenderPartial("../Album/IndexPartial", Model);
+        }
+    </div>
+</div>
+

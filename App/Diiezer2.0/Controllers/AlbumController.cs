@@ -94,7 +94,8 @@ namespace Diiezer2._0.Models
                 nombre = (int)album.NbChanson,
                 genre = album.Genre1.Nom,
                 note = noteArrondie, //la note est de type double dans la DB
-                prix = album.Prix / 100.0
+                prix = album.Prix / 100.0,
+                date = album.Date.ToString().Substring(0, 10)
             };
       
             return View(albuminfo);

@@ -13,6 +13,7 @@ namespace Diiezer2._0.Models
         public int idArtiste { get; set; }
         public int nombre { get; set; }
         public List<vmChansonInformation> chansons { get; set; }
+        public string date { get; set; }
         public int duree { get; set; }
         public string genre { get; set; }
         public String cover { get; set; }

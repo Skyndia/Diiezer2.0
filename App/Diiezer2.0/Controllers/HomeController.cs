@@ -26,6 +26,7 @@ namespace Diiezer2._0.Controllers
             DiiezerDBEntities db = new DiiezerDBEntities();
             var chansons = db.Chanson.ToList();
             chansons.Sort((x, y) => x.Note.CompareTo(y.Note));
+            chansons.Reverse();
             string user = User.Identity.Name;
 
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
@@ -59,6 +60,19 @@ namespace Diiezer2._0.Controllers
             }
 
             return View(vmChansonInformations);
+        }
+
+        public ActionResult Nouveautees()
+        {
+            DiiezerDBEntities db = new DiiezerDBEntities();
+            var albums = db.Album.ToList();
+            albums.Sort((x, y) => DateTime.Compare((DateTime)x.Date,(DateTime)y.Date));
+            albums.Reverse();
+
+            ViewBag.userAuthenticated = User.Identity.IsAuthenticated;
+            ViewBag.userName = User.Identity.Name;
+
+            return View(albums);
         }
 
         public ActionResult Contact()

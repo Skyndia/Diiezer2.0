@@ -5,11 +5,9 @@
        <h3>Les musiques qui ont étées le mieux notées jusqu'à aujourd'hui : </h3>
     </div>
     <div class="row">
+        @{
+            Html.RenderPartial("../Chanson/IndexPartial", Model);
+        }
     </div>
-    <div class="row">
-
-    </div>
-
-
 </div>
 
