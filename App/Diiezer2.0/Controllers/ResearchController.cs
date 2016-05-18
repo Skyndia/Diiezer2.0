@@ -28,23 +28,6 @@ namespace Diiezer2._0.Controllers
 
             foreach (var item in chansons)
             {
-                var notes = db.Note.Where(c => c.Chanson1.Id == item.Id).ToList();
-                int i = 0;
-                int tmp = 0;
-                int note;
-                foreach (var item2 in notes)
-                {
-                    i++;
-
-                    tmp = tmp + item2.Valeur;
-
-                }
-                if (i == 0)
-                {
-                    note = 2;
-                }
-                else note = tmp / i;
-
                 string musique;
                 bool isExtract = true;
 
@@ -61,12 +44,13 @@ namespace Diiezer2._0.Controllers
                     isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
-                    note = note,
+                    note = (int)item.Note,
                     titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
-                    musique = musique
+                    musique = musique,
+                    prix = (double)item.Prix / 100.0
                 });
             }
             vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
@@ -134,25 +118,11 @@ namespace Diiezer2._0.Controllers
             List<Chanson> chansons = new List<Chanson>();
 
             //Requête pour les artistes ici :
-            //chansons = db.Chanson.Include(c => c.Album1).Where(a => a.Titre.Contains(champTitre) &&
-            //a.Album1.Genre1.Nom.Contains(champGenre)).ToList();
+            chansons = db.Chanson.Include(c => c.Album1).Where(c => c.Titre.Contains(champTitre) &&
+            c.Album1.Genre1.Nom.Contains(champGenre) &&
+            c.Note >= champNote).ToList();
 
-            //Bon, Faut commencer par prendre toutes les notes supérieure à champNote. 
-            //Après on en extrait les chansons. Puis on applique les critères sur les chansons.
-
-            var notes = db.Note.Include(n => n.Chanson1).Where(n => n.Valeur >= champNote).ToList();
-            foreach (var item in notes)
-            {
-                if (!chansons.Contains(item.Chanson1))
-                {
-                    chansons.Add(item.Chanson1);
-                }
-            }
-            var chansonsFiltree = chansons.Where(a => a.Titre.Contains(champTitre) &&
-            a.Album1.Genre1.Nom.Contains(champGenre)).ToList();
-
-
-            result = getVm(chansonsFiltree);
+            result = getVm(chansons);
             return result;
         }
 
