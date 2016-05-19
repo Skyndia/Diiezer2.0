@@ -14,7 +14,7 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
-        public ActionResult AcheterChanson(int idChanson)
+        public ActionResult AcheterChanson(int idChanson, string url)
         {
 
             var achats = db.Achat.Where(c => c.Utilisateur == User.Identity.Name && c.Chanson1.Id == idChanson).ToList();
@@ -29,7 +29,7 @@ namespace Diiezer2._0.Controllers
             }
 
 
-            return Redirect("../Chanson/Details/"+idChanson.ToString());
+            return Redirect(url);
         }
 
         public ActionResult AcheterAlbum(int idAlbum)

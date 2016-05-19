@@ -86,7 +86,11 @@
                 @{
                     if (item.isExtract)
                     {
-                        <p>@item.prix &euro; </p>
+                        var url = HttpContext.Current.Request.Url.AbsoluteUri;
+                        var s = "Acheter " + item.titre + " pour " + item.prix + " € ?";
+                        var confirm = "return confirm(" + "\'" + s + "\'" + ");";
+                        @Html.ActionLink(item.prix + "€", "../Achat/AcheterChanson", new { idChanson = item.idChanson, url = url }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })
+                        
                     }
                     else
                     {

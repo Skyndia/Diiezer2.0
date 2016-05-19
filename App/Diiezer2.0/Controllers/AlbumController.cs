@@ -61,6 +61,8 @@ namespace Diiezer2._0.Models
                     isExtract = false;
                 }
                 else musique = item.Extrait;
+                string titre = item.Titre;
+                if (isExtract) { titre = item.Titre + " (Extrait)"; }
 
                 vmChansonInformations.Add(new vmChansonInformation
                 {
@@ -69,7 +71,7 @@ namespace Diiezer2._0.Models
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
                     note = (int)item.Note,
-                    titre = item.Titre,
+                    titre = titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
