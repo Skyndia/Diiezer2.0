@@ -5,11 +5,46 @@
 }
 
 <div class="grey-box2">
-    <h2>Page @ViewBag.page</h2>
-    @{
-        Html.RenderPartial("IndexPartial", Model);
-    }
-
+    <div class="row">
+        <div class="col-md-2">
+            <h2>Page @ViewBag.page</h2>
+        </div>
+        <div class="col-md-1">
+            <p>trier par</p>
+        </div>
+        <div class="col-md-3">
+            <select name="select" id="select">
+                <option value="note">Note</option>
+                <option value="duree">Durée</option>
+            </select>
+            <input id="tri" type="hidden" />
+        </div>
+        <div class="col-md-2">
+            
+        </div>
+    </div>
+    @*<div id="indexpartiel">
+        @{
+            Html.RenderAction("IndexPartial", new { model = Model });
+        }
+    </div>
+    @Ajax.ActionLink("Actualiser", "IndexPartial", new { model = Model }, new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "indexpartiel",
+        HttpMethod = "GET"
+    })*@
+    <div id="indexpartiel">
+            @{
+                Html.RenderAction("IndexPartial", new {model = Model });
+            }
+    </div>
+        @Ajax.ActionLink("Actualiser", "IndexPartial", new { tri = "note", model=Model }, new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "indexpartiel",
+            HttpMethod = "GET"
+        })
 
 
     <!-- Pagination -->

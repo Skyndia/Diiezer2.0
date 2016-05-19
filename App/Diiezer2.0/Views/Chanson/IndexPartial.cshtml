@@ -8,22 +8,22 @@
 <table class="table grey-box table-bordered border0 table-striped">
     <tr>
         <th>
-            @Html.ActionLink("Titre", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "titre" })
+            @Html.ActionLink("Titre", "../Chanson/trierIndexChansons", new { tri = "titre", url = "../" + HttpContext.Current.Request.Url.AbsolutePath, model = Model })
         </th>
         <th>
-            @Html.ActionLink("Durée", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "duree" })
+            @Html.ActionLink("Durée", "../Chanson/trierIndexChansons", new { tri = "duree", url = "../" + HttpContext.Current.Request.Url.AbsolutePath, model = Model })
         </th>
         <th>
-            @Html.ActionLink("Artiste", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "artiste" })
+            @Html.ActionLink("Artiste", "../Chanson/trierIndexChansons", new { tri = "artiste", url = "../" + HttpContext.Current.Request.Url.AbsolutePath, model = Model })
         </th>
         <th>
-            @Html.ActionLink("Album", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "album" })
+            @Html.ActionLink("Album", "../Chanson/trierIndexChansons", new { tri = "album", url = "../" + HttpContext.Current.Request.Url.AbsolutePath, model = Model })
         </th>
         <th>
-            @Html.ActionLink("Note", "../" + HttpContext.Current.Request.Url.AbsolutePath, new { tri = "note" })
+            @Html.ActionLink("Note", "../Chanson/trierIndexChansons", new { tri = "note", url = "~/Views/Chanson/IndexPartial", model = Model })
         </th>
         <th>
-            @Html.ActionLink("Prix", "../"+HttpContext.Current.Request.Url.AbsolutePath, new { tri = "prix" })
+            @Html.ActionLink("Prix", "../Chanson/trierIndexChansons", new { tri = "prix", url = "../" + HttpContext.Current.Request.Url.AbsolutePath, model = Model })
         </th>
     </tr>
 
