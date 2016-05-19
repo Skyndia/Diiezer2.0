@@ -1,10 +1,8 @@
 ﻿@model Diiezer2._0.Models.vmAlbumInformation
 
 <!-- Test **************************** -->
-<div class="container container-audio">
-    <div class="column center">
-        <h1>HTML5 Audio Player</h1>
-    </div>
+<div class="container">
+
     <div class="column add-bottom">
         <div id="mainwrap">
             <div id="nowPlay">
@@ -30,9 +28,9 @@
                             <li>
                                 
                                 <div class="plItem row">
-                                    <div class="plNum col-md-1">@compteur</div>
-                                    <div class="plTitle col-md-7">@item.titre</div>                                   
-                                    <div class="plStar col-md-2">
+                                    <div class="plNum col-xs-1 col-sm-1 col-md-1">@compteur</div>
+                                    <div class="plTitle col-xs-6 col-sm-6 col-md-7">@item.titre</div>                                   
+                                    <div class="plStar col-xs-3 col-sm-3 col-md-2">
                                         <!--Test************************-->
                                         @{
                                             if (Request.IsAuthenticated)
@@ -74,7 +72,7 @@
                                         
                                         <!--Test************************-->
                                     </div>
-                                    <div class="plLength col-xs-2 col-md-2">
+                                    <div class="plLength col-xs-2 col-sm-2 col-md-2">
                                         @{var duree = (Model.chansons.ElementAt(compteur - 1).durée / 60).ToString() + " min " + (Model.chansons.ElementAt(compteur - 1).durée % 60).ToString();
                                         }
                                         @duree

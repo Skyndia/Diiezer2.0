@@ -181,3 +181,14 @@ h4
 {
     vertical-align : middle
 }
+
+.btn-danger
+{
+    background-color: rgba(0,0,0,0);
+    border-color : white;
+}
+
+.btn-danger:focus
+{
+    background-color : rgba(0,0,0,0);
+}

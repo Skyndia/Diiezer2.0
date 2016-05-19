@@ -71,7 +71,7 @@
                     @{
                         var s = "Acheter " + Model.nom + " pour " + Model.prix + " € ?";
                         var confirm = "return confirm(" + "\'" + s + "\'" + ");"  ;
-                        @Html.ActionLink("Acheter l'Album", "../Achat/AcheterAlbum", new { idAlbum = Model.id }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })
+                        @Html.ActionLink("Acheter l'Album", "../Achat/AcheterAlbum", new { idAlbum = Model.id }, new { onclick = confirm, @class = "btn btn-info btn-achat" })
                     }
                     
                 </div>
@@ -79,7 +79,8 @@
 
         </div>
     </div>
-
+    <hr />
+    <hr />
     @{
         Html.RenderPartial("partialLecteur", Model);
     }
