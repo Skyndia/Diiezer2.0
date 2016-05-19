@@ -128,11 +128,11 @@ transition:all 100ms ease;
 #plList li { background-color:#231F20; cursor:pointer; margin:0; line-height:1;}
 #plList li:hover { background-color:#262223; }
 .plItem { position:relative; padding : 10px;}
-.plTitle { overflow:hidden;text-overflow:ellipsis; white-space:nowrap; position : relative; top: 15px}
-.plNum {position : relative;  top: 15px}
-.plLength {  position : relative; top: 15px}
-.plStar {position : relative; top : 15px}
-.plDl {position : relative; top: -5px}
+.plTitle { overflow:hidden;text-overflow:ellipsis; white-space:nowrap; position : relative; top: 0px}
+.plNum {position : relative;  top: 0px}
+.plLength {  position : relative; top: 0px}
+.plStar {position : relative; top : 0px}
+.plDl {position : relative; top: 0px}
 .plSel,.plSel:hover { background-color:#262223!important; cursor:default!important; }
 a[id^="btn"] { background-color:#231F20; color:#C8C7C8; cursor:pointer; font-size:50px; margin:0; padding:0 27px 11px; text-decoration:none; position: relative; top:-15px}
 a[id^="btn"]:last-child { margin-left:-4px; }

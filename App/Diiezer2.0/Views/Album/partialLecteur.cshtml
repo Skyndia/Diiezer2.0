@@ -31,15 +31,7 @@
                                 
                                 <div class="plItem row">
                                     <div class="plNum col-md-1">@compteur</div>
-                                    <div class="plTitle col-md-5">@item.titre</div>
-                                    <div class="col-md-2">
-                                        @{
-                                            if (!item.isExtract && User.Identity.IsAuthenticated)
-                                            {
-                                                <a href=@item.musique download><img src="~/Content/img/download.png" class="img-responsive btn-dl plDl"></a>
-                                            }
-                                        }
-                                    </div>
+                                    <div class="plTitle col-md-7">@item.titre</div>                                   
                                     <div class="plStar col-md-2">
                                         <!--Test************************-->
                                         @{
@@ -83,7 +75,7 @@
                                         <!--Test************************-->
                                     </div>
                                     <div class="plLength col-xs-2 col-md-2">
-                                        @{var duree = (Model.duree / 60).ToString() + " min " + (Model.duree % 60).ToString();
+                                        @{var duree = (Model.chansons.ElementAt(compteur - 1).durée / 60).ToString() + " min " + (Model.chansons.ElementAt(compteur - 1).durée % 60).ToString();
                                         }
                                         @duree
                                     </div>

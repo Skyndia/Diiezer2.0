@@ -146,8 +146,8 @@ h4
 
 .btn-dl
 {
-    width : 35%;
-    height : 35%;
+    width : 50%;
+    height : auto;
 }
 
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th
@@ -170,4 +170,14 @@ h4
 .prez-album >tbody > tr > td
 {
     width : 50%;
+}
+
+.small-td
+{
+    width : 10%;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td
+{
+    vertical-align : middle
 }
