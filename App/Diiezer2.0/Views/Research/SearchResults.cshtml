@@ -34,9 +34,32 @@
     {
         if ((Model.chansons != null) && (Model.chansons.Count > 0))
         {
-            <h2>Chansons</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Chansons</h2>
+                </div>
+                <div class="col-md-2 col-md-offset-6">
+                    <select name="select" id="select" onchange="select()" class="form-control" style="margin-top:20px">
+                        <option value="default">Trier par...</option>
+                        <option value="titre">Titre</option>
+                        <option value="note">Note</option>
+                        <option value="duree">Durée</option>
+                        <option value="album">Album</option>
+                        <option value="artiste">Artiste</option>
+                        <option value="prix">Prix</option>
+                    </select>
+
+                </div>
+                <div class="col-md-2">
+                    <a id="lien" href="/Research/Search" data-ajax-update="#indexpartiel" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
+                </div>
+            </div>
             <hr />
-            Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
+            <div id="indexpartiel">
+                @{
+                    Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
+                }
+            </div>
             <hr />
         }
     }
@@ -51,3 +74,17 @@
         </p>
     }
 }
+<script type="text/javascript">
+    function select()
+    {
+        if ('@(ViewBag.type)' == 'quick')
+        {
+            $('#lien').attr('href', '/Research/QuickSearch?tri=' + document.getElementById('select').value);
+        }
+        if ('@(ViewBag.type)' == 'long')
+        {
+            $('#lien').attr('href', '/Research/Search?tri=' + document.getElementById('select').value);
+        }
+        $('#lien').click();
+    }
+</script>

@@ -12,7 +12,6 @@ namespace Diiezer2._0.Controllers
     public class ResearchController : Controller
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
-
         // GET: Research
         public ActionResult Begin()
         {
@@ -179,51 +178,140 @@ namespace Diiezer2._0.Controllers
         }
 
         //POST : Search
-        [HttpPost]
-        public ActionResult Search(FormCollection criteres)
+        //[HttpPost]
+        public ActionResult Search(FormCollection criteres, string tri)
         {
+            ViewBag.type = "long";
             vmResearchResult result = new vmResearchResult();
             String but = criteres["but"]; //but : Artistes, Albums, chansons ou tous
 
-            //PARTIE ARTISTES
-            if ((but.CompareTo("SearchArtists") == 0)||(but.CompareTo("SearchAll") == 0)) //On cherche des Artistes
+            if (!Request.IsAjaxRequest())
             {
-                result.artistes = requeteArtiste(criteres);
-                result.artistes.Sort((x, y) => x.nom.CompareTo(y.nom));
+                Session["artiste"] = criteres["artiste"];
+                Session["album"] = criteres["album"];
+                Session["genre"] = criteres["genre"];
+                Session["note"] = criteres["note"];
+                Session["titre"] = criteres["titre"];
+                //PARTIE ARTISTES
+                if ((but.CompareTo("SearchArtists") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Artistes
+                {
+                    result.artistes = requeteArtiste(criteres);
+                    result.artistes.Sort((x, y) => x.nom.CompareTo(y.nom));
+                }
+                //PARTIE ALBUMS
+                if ((but.CompareTo("SearchAlbums") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Albums
+                {
+                    result.albums = requeteAlbum(criteres);
+                    result.albums.Sort((x, y) => x.Titre.CompareTo(y.Titre));
+                }
+
+                //PARTIE CHANSONS
+                if ((but.CompareTo("SearchTitres") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Chansons
+                {
+                    result.chansons = requeteChanson(criteres);
+                    result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
+                }
             }
-            //PARTIE ALBUMS
-            if ((but.CompareTo("SearchAlbums") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Albums
+            else
             {
-                result.albums = requeteAlbum(criteres);
-                result.albums.Sort((x, y) => x.Titre.CompareTo(y.Titre));              
+                FormCollection form = new FormCollection();
+                form["artiste"] = Session["artiste"].ToString();
+                form["album"] = Session["album"].ToString();
+                form["genre"] = Session["genre"].ToString();
+                form["note"] = Session["note"].ToString();
+                form["titre"] = Session["titre"].ToString();
+                //PARTIE CHANSONS
+                    result.chansons = requeteChanson(form);
+
+                    if (tri == "note")
+                    {
+                        result.chansons.Sort((x, y) => x.note.CompareTo(y.note));
+                        result.chansons.Reverse();
+                    }
+                    else if (tri == "album")
+                    {
+                        result.chansons.Sort((x, y) => x.album.CompareTo(y.album));
+                    }
+                    else if (tri == "artiste")
+                    {
+                        result.chansons.Sort((x, y) => x.artiste.CompareTo(y.artiste));
+                    }
+                    else if (tri == "duree")
+                    {
+                        result.chansons.Sort((x, y) => x.durée.CompareTo(y.durée));
+                        result.chansons.Reverse();
+                    }
+                    else if (tri == "prix")
+                    {
+                        result.chansons.Sort((x, y) => x.prix.CompareTo(y.prix));
+                    }
+                    else
+                    {
+                        result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
+                    }
+                    return PartialView("../Chanson/IndexPartial", result.chansons);
+                
             }
 
-            //PARTIE CHANSONS
-            if ((but.CompareTo("SearchTitres") == 0) || (but.CompareTo("SearchAll") == 0)) //On cherche des Chansons
-            {
-                result.chansons = requeteChanson(criteres);
-                result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
-            }
+            
             ViewBag.but = but;
             return View("SearchResults", result);
         }
 
-        //POST : Quick Search
-        public ActionResult QuickSearch(String critere)
+        //GET : Quick Search
+        public ActionResult QuickSearch(String critere, string tri)
         {
+            ViewBag.type = "quick";
             vmResearchResult result = new vmResearchResult();
+            
 
-            result.artistes = requeteArtisteRapide(critere);
-            result.artistes.Sort((x, y) => x.nom.CompareTo(y.nom));
+            if (!Request.IsAjaxRequest())
+            {
+                Session["quick"] = critere;
+                result.artistes = requeteArtisteRapide(critere);
+                result.artistes.Sort((x, y) => x.nom.CompareTo(y.nom));
 
-            result.albums = requeteAlbumRapide(critere);
-            result.albums.Sort((x, y) => x.Titre.CompareTo(y.Titre));
+                result.albums = requeteAlbumRapide(critere);
+                result.albums.Sort((x, y) => x.Titre.CompareTo(y.Titre));
 
-            result.chansons = requeteChansonRapide(critere);
-            result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
+                result.chansons = requeteChansonRapide(critere);
+                result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));                
+            }
+            else
+            {
+                
+                result.chansons = requeteChansonRapide(Session["quick"].ToString());
+                if (tri == "note")
+                {
+                    result.chansons.Sort((x, y) => x.note.CompareTo(y.note));
+                    result.chansons.Reverse();
+                }
+                else if (tri == "album")
+                {
+                    result.chansons.Sort((x, y) => x.album.CompareTo(y.album));
+                }
+                else if (tri == "artiste")
+                {
+                    result.chansons.Sort((x, y) => x.artiste.CompareTo(y.artiste));
+                }
+                else if (tri == "duree")
+                {
+                    result.chansons.Sort((x, y) => x.durée.CompareTo(y.durée));
+                    result.chansons.Reverse();
+                }
+                else if (tri == "prix")
+                {
+                    result.chansons.Sort((x, y) => x.prix.CompareTo(y.prix));
+                }
+                else
+                {
+                    result.chansons.Sort((x, y) => x.titre.CompareTo(y.titre));
+                }
+                return PartialView("../Chanson/IndexPartial", result.chansons);
+            }
+
 
             ViewBag.but = "SearchAll";
-
             return View("SearchResults", result);
         }
     }
