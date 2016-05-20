@@ -6,74 +6,111 @@
 
 <h2>Details</h2>
 
-<div class="grey-box">
-    <h4>Chanson</h4>
+<div class="grey-box container">
     <hr />
-    <audio src=@Model.musique controls></audio>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>@Model.titre</h4>
+        </div>
+        <div class="col-md-6">
+            <audio src=@Model.musique controls style="margin-top:10px"></audio>
+        </div>
+    </div>
     <hr />
-    <dl class="dl-horizontal">
-        <dd>
-            Titre : 
-            @Html.ActionLink(Model.titre, "Details", new { id = Model.idChanson })
-        </dd>
-        <dd>
-            Album : 
-            @Html.ActionLink(Model.album, "../Album/Details", new { id = Model.idAlbum })
-        </dd>
-        <dd>
-            Artiste : 
-            @Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })
-        </dd>
-        <dd>
-            Durée :
-            @{ var duree = (Model.durée / 60).ToString() + " min " + (Model.durée % 60).ToString();}
-            @duree
-        </dd>
-        @{
-            if (Model.isExtract && User.Identity.IsAuthenticated)
-            {
-                <dd>@Html.ActionLink("Acheter ..", "../Achat/AcheterChanson", new { idChanson = Model.idChanson })</dd>
-            } else if (User.Identity.IsAuthenticated)
-            {
-                <dd>Morceaux acheté</dd>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-responsive table-hover table-bordered border0 prez-album">
+                <tr>
+                    <td>Titre</td>
+                    <td>@Model.titre</td>
+                </tr>
+                <tr>
+                    <td>Album</td>
+                    <td>@Html.ActionLink(Model.album, "../Album/Details", new { id = Model.idAlbum })</td>
+                </tr>
+                <tr>
+                    <td>Artiste</td>
+                    <td>@Html.ActionLink(Model.artiste, "../Artiste/Details", new { id = Model.idArtiste })</td>
+                </tr>
+                <tr>
+                    <td>Durée</td>
+                    <td>
+                        @{ var duree = (Model.durée / 60).ToString() + " min " + (Model.durée % 60).ToString();}
+                        @duree
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @{
+                if (Model.isExtract && User.Identity.IsAuthenticated)
+                {
+                    var s = "Acheter " + Model.titre + " pour " + Model.prix + " € ?";
+                    var confirm = "return confirm(" + "\'" + s + "\'" + ");";
+                    @Html.ActionLink("Acheter", "../Achat/AcheterChanson", new { idChanson = Model.idChanson }, new { onclick = confirm, @class = "btn btn-info btn-achat", @style="margin-top:0px" });
+                }
+                else if (User.Identity.IsAuthenticated)
+                {
+                    <p>Morceaux acheté</p>
+                }
             }
-        }
-
-    </dl>
-</div>
-
-<div class="grey-box">
-    <dl class="dl-horizontal">
-        <dd>  
+        </div>
+    </div>
+    <hr style="border:0px" />
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Commentaires</h4>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("Commenter", "Chanson"))
+                using (Html.BeginForm("Commenter", "Commentaire", new { @class = "form-horizontal" }))
                 {
                     <input type="hidden" name="url" value="../Chanson/Details/@Model.idChanson" />
                     <input type="hidden" name="idMusique" value="@Model.idChanson" />
-                    <textarea rows="4" cols="50" name="comment">
-                        Ecrivez votre commentaire ...
-                    </textarea>
-
-                    <input type="submit" value="Commenter" />
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <textarea rows="4" name="comment" class="form-control comment-box" maxlength="200"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="submit" value="Publier" class="btn btn-default"/>
+                        </div>
+                    </div>
                 }
             }
-        </dd>
-    </dl>  
-    <h4>Commentaires</h4>
+        </div>
+    </div>
     <hr />
-    @{
+    @{ 
         foreach (var item in Model.commentaires)
         {
-            <hr />
-            <h6>Posteur : @item.Utilisateur</h6>
-            <h8>Commentaire : @item.Texte</h8>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>@item.Utilisateur</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="btn btn-default comment">@item.Texte</p>
+                </div>
+            </div>
+            <hr style="border:0px" />
         }
-    }      
+    }
 </div>
+
 
 
  
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

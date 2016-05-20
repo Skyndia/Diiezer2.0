@@ -152,20 +152,6 @@ namespace Diiezer2._0.Models
             return View(url,chansons);
         }
 
-        [HttpPost]
-        public ActionResult Commenter(string idMusique, string comment, string url)
-        {
-
-            Commentaire comm = new Commentaire();
-            comm.IdChanson = int.Parse(idMusique);
-            comm.Texte = comment;
-            comm.Utilisateur = User.Identity.Name;
-            db.Commentaire.Add(comm);
-            db.SaveChanges();
-            
-
-            return Redirect(url);
-        }
         
 
         //Get : Chanson/IndexPartial
