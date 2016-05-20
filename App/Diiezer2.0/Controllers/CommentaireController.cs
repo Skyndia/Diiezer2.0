@@ -24,5 +24,10 @@ namespace Diiezer2._0.Controllers
 
             return Redirect(url);
         }
+
+        public ActionResult partialComment(Commentaire comment)
+        {
+            return PartialView(comment);
+        }
     }
 }

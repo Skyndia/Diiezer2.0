@@ -88,20 +88,17 @@
         </div>
     </div>
     <hr />
-    @{ 
+    @{
+        int compteur = 0;
         foreach (var item in Model.commentaires)
         {
-            <div class="row">
-                <div class="col-md-6">
-                    <p>@item.Utilisateur</p>
-                </div>
+            compteur++;
+            var id= "comment" + compteur.ToString();
+            <div id=@id>
+                @{
+                    Html.RenderAction("partialComment", "Commentaire", new { comment = item });
+                }
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="btn btn-default comment">@item.Texte</p>
-                </div>
-            </div>
-            <hr style="border:0px" />
         }
     }
 </div>
