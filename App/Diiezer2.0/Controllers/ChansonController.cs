@@ -15,22 +15,49 @@ namespace Diiezer2._0.Models
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
         // GET: Chanson/Index/5
-        public ActionResult Index(int? id)
+        public ActionResult Index(string tri)
         {
-            if (id == null)
+            List<vmChansonInformation> vmChansonInformations =  this.getvmChansonInformations();
+
+            //Si requete Ajax
+            if (Request.IsAjaxRequest())
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                id = 1;
+                if (tri == "note")
+                {
+                    vmChansonInformations.Sort((x, y) => x.note.CompareTo(y.note));
+                    vmChansonInformations.Reverse();
+                }
+                else if (tri == "album")
+                {
+                    vmChansonInformations.Sort((x, y) => x.album.CompareTo(y.album));
+                }
+                else if (tri == "artiste")
+                {
+                    vmChansonInformations.Sort((x, y) => x.artiste.CompareTo(y.artiste));
+                }
+                else if (tri == "duree")
+                {
+                    vmChansonInformations.Sort((x, y) => x.durée.CompareTo(y.durée));
+                    vmChansonInformations.Reverse();
+                }
+                else if (tri == "prix")
+                {
+                    vmChansonInformations.Sort((x, y) => x.prix.CompareTo(y.prix));
+                }
+                else
+                {
+                    vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
+                }
+                return PartialView("IndexPartial", vmChansonInformations);
             }
-            
-
-            List<vmChansonInformation> vmChansonInformations =  this.getvmChansonInformations((int)id);
-
-
+            else
+            {
+                vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
+            }
             return View(vmChansonInformations);
         }
 
-        public List<vmChansonInformation> getvmChansonInformations(int? id)
+        public List<vmChansonInformation> getvmChansonInformations()
         {
             
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
@@ -65,27 +92,7 @@ namespace Diiezer2._0.Models
                     musique = musique,
                     prix = (double)item.Prix / 100.0
                 });
-            }
-            int NbChansonsParPage = 20;
-            int nbPage = vmChansonInformations.Count / NbChansonsParPage + 1;
-            int precedente = 1;
-            int suivante = nbPage;
-
-            if (id > 2) precedente = id.Value - 1;
-            if (id < nbPage - 1) suivante = id.Value + 1;
-
-            ViewBag.page = id;
-            ViewBag.nbPage = nbPage;
-            ViewBag.precedente = precedente;
-            ViewBag.suivante = suivante;
-
-            int n = vmChansonInformations.Count;
-            int max = NbChansonsParPage;
-            if (NbChansonsParPage > n - NbChansonsParPage * (id.Value - 1)) max = n - NbChansonsParPage * (id.Value - 1);
-
-            vmChansonInformations.Sort((x, y) => x.titre.CompareTo(y.titre));
-            vmChansonInformations.Skip(20 * (id.Value - 1)).Take(max);
-
+            }    
             return vmChansonInformations;
         }
 
@@ -159,42 +166,12 @@ namespace Diiezer2._0.Models
 
             return Redirect(url);
         }
-
-        public ActionResult TrierIndexChansons(string url, List<vmChansonInformation> model, string tri)
-        {
-            if (tri == "note")
-            {
-                model.Sort((x, y) => x.note.CompareTo(y.note));
-                model.Reverse();
-            }
-            else if (tri == "album")
-            {
-                model.Sort((x, y) => x.album.CompareTo(y.album));
-            }
-            else if (tri == "artiste")
-            {
-                model.Sort((x, y) => x.artiste.CompareTo(y.artiste));
-            }
-            else if (tri == "duree")
-            {
-                model.Sort((x, y) => x.durée.CompareTo(y.durée));
-                model.Reverse();
-            }
-            else if (tri == "prix")
-            {
-                model.Sort((x, y) => x.prix.CompareTo(y.prix));
-            }
-            else
-            {
-                model.Sort((x, y) => x.titre.CompareTo(y.titre));
-            }
-            return PartialView(url, model);
-        }
+        
 
         //Get : Chanson/IndexPartial
-        public ActionResult IndexPartial(List<vmChansonInformation> model, string tri)
+        public ActionResult IndexPartial(List<vmChansonInformation> model,string tri)
         {
-            if (tri != null)
+            if (model != null)
             {
                 if (tri == "note")
                 {
@@ -223,7 +200,9 @@ namespace Diiezer2._0.Models
                     model.Sort((x, y) => x.titre.CompareTo(y.titre));
                 }
             }
-          
+            else { model = new List<vmChansonInformation>(); }
+                
+                      
             return PartialView(model);
         }
 
