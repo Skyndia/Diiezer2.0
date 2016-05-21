@@ -96,18 +96,31 @@
             var id= "comment" + compteur.ToString();
             <div id=@id>
                 @{
-                    Html.RenderAction("partialComment", "Commentaire", new { comment = item });
+                    Html.RenderAction("partialComment", "Commentaire", new { comment = item, idbox = compteur});
                 }
             </div>
         }
     }
 </div>
 
+<a id="lien" href="/Commentaire/partialEditComm" data-ajax-update="#comment1" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
 
-
- 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script type="text/javascript">
+    function editComm(idbox, idcom)
+    {
+        $('#lien').attr('data-ajax-update', '#comment'+idbox);
+        $('#lien').attr('href', '/Commentaire/partialEditComm?idCommentaire='+idcom+'&&idbox='+idbox);
+        $('#lien').click();
+    }
+    function saveEditCom(idbox, idcom) {
+        $('#lien').attr('data-ajax-update', '#comment' + idbox);
+        $('#lien').attr('href', '/Commentaire/SaveCommentChanges?idCommentaire=' + idcom + '&&idbox=' + idbox + '&&text=' + document.getElementById('commentEditBox').innerText);
+        $('#lien').click();
+    }
+</script>
 
 

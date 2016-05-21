@@ -1,3 +1,24 @@
 ﻿@model Diiezer2._0.Models.Commentaire
 
 
+<div class="row">
+    <div class="col-md-12">
+        @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Editer", "Commentaire", new { @class = "form-horizontal" }))
+                {
+                <input type="hidden" name="url" value="../Chanson/Details/@Model.Chanson.Id" />
+                    <input type="hidden" name="idMusique" value="@Model.Chanson.Id" />
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <textarea rows="4" id="commentEditBox" class="form-control comment-box" maxlength="200">@Model.Texte</textarea>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" value="Comfirmer" class="btn btn-default" onclick="saveEditCom(@ViewBag.idbox, @Model.Id)" >Confirmer</button>
+                        </div>
+                    </div>
+            }
+        }
+    </div>
+</div>
+<hr style="border:0px" />

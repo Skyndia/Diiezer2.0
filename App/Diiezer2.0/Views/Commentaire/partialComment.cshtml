@@ -2,15 +2,19 @@
 
 <div class="row">
     <div class="col-md-6">
-        <p>@Model.Utilisateur</p>
-    </div>
-    <div class="col-md-6" style="text-align:right">
-        
+        <p>@Model.Utilisateur.Split('@').ElementAt(0)</p>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-11">
         <p class="btn btn-default comment">@Model.Texte</p>
     </div>
+    @if (User.Identity.Name == Model.Utilisateur)
+    {
+        <div class="col-md-1" style="text-align:right">
+            <button type="button" class="btn btn-default" onclick="editComm(@ViewBag.idbox, @Model.Id)">Editer</button>
+        </div>
+    }
+    
 </div>
 <hr style="border:0px" />

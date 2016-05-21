@@ -209,13 +209,12 @@ h4
     border-color:white;
     text-align:left;
     line-height:2;
+    overflow:hidden;
 }
 
 .comment:hover
 {
     border-color:rgb(0, 200, 200);
-    background-color:white;
-    overflow:hidden;
-    
+    background-color:white;   
 }
 

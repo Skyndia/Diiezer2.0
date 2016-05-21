@@ -103,6 +103,7 @@ namespace Diiezer2._0.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Chanson chanson = db.Chanson.Find(id);
             string user = User.Identity.Name;
             

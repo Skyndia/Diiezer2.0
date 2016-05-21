@@ -25,9 +25,27 @@ namespace Diiezer2._0.Controllers
             return Redirect(url);
         }
 
-        public ActionResult partialComment(Commentaire comment)
+        public ActionResult partialComment(Commentaire comment,int? idbox)
         {
+            ViewBag.idbox = idbox;
             return PartialView(comment);
+        }
+
+        public ActionResult partialEditComm(int? idCommentaire, int idbox)
+        {
+            ViewBag.idbox = idbox;
+            var com = db.Commentaire.Where(c => c.Id == idCommentaire).First();
+            return PartialView(com);
+        }
+
+        public ActionResult saveCommentChanges(int idCommentaire, int idbox, string text)
+        {
+            var com = db.Commentaire.Where(c => c.Id == idCommentaire).First();
+
+            com.Texte = text;
+            db.SaveChanges();
+            ViewBag.idbox = idbox;
+            return PartialView("partialComment", com);
         }
     }
 }
