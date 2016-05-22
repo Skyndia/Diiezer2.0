@@ -1,15 +1,29 @@
-﻿@model IEnumerable<Diiezer2._0.Models.vmChansonInformation>
+﻿@model Diiezer2._0.Models.vmResearchResult
 
 <div class="container grey-box">
     <div class="row">
         <div class="col-md-12">
-            <h3>Les musiques qui ont étées le mieux notées jusqu'à aujourd'hui : </h3>
+            <h3>Les 3 Meilleurs Albums : </h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             @{
-                Html.RenderPartial("../Chanson/IndexPartial", Model);
+                Html.RenderPartial("../Album/IndexPartial", Model.albums);
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Les 10 Meilleurs Chansons : </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @{
+                Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
             }
         </div>
     </div>

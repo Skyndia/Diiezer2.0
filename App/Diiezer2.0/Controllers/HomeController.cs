@@ -27,6 +27,7 @@ namespace Diiezer2._0.Controllers
             var chansons = db.Chanson.ToList();
             chansons.Sort((x, y) => x.Note.CompareTo(y.Note));
             chansons.Reverse();
+            chansons = chansons.Take(10).ToList();
             string user = User.Identity.Name;
 
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
@@ -40,6 +41,10 @@ namespace Diiezer2._0.Controllers
                     musique = item.Musique;
                     isExtract = false;
                 }
+                //Je veux arrondir chanson.note---------
+                double partieDecimale = item.Note - Math.Floor(item.Note);
+                int noteArrondie = (int)(Math.Floor(item.Note));
+                if (partieDecimale > 0.5) noteArrondie += 1;
 
                 vmChansonInformations.Add(
                     new vmChansonInformation
@@ -48,7 +53,7 @@ namespace Diiezer2._0.Controllers
                         isExtract = isExtract,
                         artiste = item.Album1.Artiste1.Nom,
                         durée = (int)item.Durée,
-                        note = (int)item.Note,
+                        note = noteArrondie,
                         titre = item.Titre,
                         idAlbum = item.Album1.Id,
                         idArtiste = item.Album1.Artiste1.Id,
@@ -58,8 +63,16 @@ namespace Diiezer2._0.Controllers
                     }
                     );
             }
+            var albums = db.Album.ToList();
+            albums.Sort((x, y) => x.Note.CompareTo(y.Note));
+            albums.Reverse();
+            albums = albums.Take(3).ToList();
 
-            return View(vmChansonInformations);
+            vmResearchResult result = new vmResearchResult();
+            result.chansons = vmChansonInformations;
+            result.albums = albums;
+
+            return View(result);
         }
 
         public ActionResult Nouveautees()

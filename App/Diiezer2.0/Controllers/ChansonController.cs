@@ -76,7 +76,11 @@ namespace Diiezer2._0.Models
                         isExtract = false;
                     }
                 }
-                
+
+                //Je veux arrondir chanson.note---------
+                double partieDecimale = item.Note - Math.Floor(item.Note);
+                int noteArrondie = (int)(Math.Floor(item.Note));
+                if (partieDecimale > 0.5) noteArrondie += 1;
 
                 vmChansonInformations.Add(new vmChansonInformation
                 {
@@ -84,7 +88,7 @@ namespace Diiezer2._0.Models
                     isExtract = isExtract,
                     artiste = item.Album1.Artiste1.Nom,
                     durée = (int)item.Durée,
-                    note = (int)item.Note,
+                    note = noteArrondie,
                     titre = item.Titre,
                     idAlbum = item.Album1.Id,
                     idArtiste = item.Album1.Artiste1.Id,
@@ -121,6 +125,11 @@ namespace Diiezer2._0.Models
             var comms = db.Commentaire.Where(c => c.IdChanson == id).ToList();
             comms.Reverse();
 
+            //Je veux arrondir chanson.note---------
+            double partieDecimale = chanson.Note - Math.Floor(chanson.Note);
+            int noteArrondie = (int)(Math.Floor(chanson.Note));
+            if (partieDecimale > 0.5) noteArrondie += 1;
+
             vmChansonInformation info = new vmChansonInformation
             {
                 album = chanson.Album1.Titre,
@@ -128,7 +137,7 @@ namespace Diiezer2._0.Models
                 durée = (int)chanson.Durée,
                 isExtract = isExtract,
                 commentaires = comms,
-                note = (int)chanson.Note,
+                note = noteArrondie,
                 titre = chanson.Titre,
                 idAlbum = chanson.Album1.Id,
                 idArtiste = chanson.Album1.Artiste1.Id,

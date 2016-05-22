@@ -53,7 +53,7 @@ namespace Diiezer2._0.Controllers
             else
             {
                 nbNoteChanson = chanson.NbNote + 1;
-                newNoteChanson = (ancienneNote * nbNoteChanson + note) / nbNoteChanson;
+                newNoteChanson = (ancienneNote * chanson.NbNote + note) / nbNoteChanson;
             }
 
             if (chanson.NbNote == 0) // Si la chanson n'avait pas encore été notée
