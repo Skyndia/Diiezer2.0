@@ -71,9 +71,9 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     @{
-                        var s = "Acheter " + Model.nom + " pour " + Model.prix + " € ?";
+                        var s = "Ajouter " + Model.nom + " au panier ?";
                         var confirm = "return confirm(" + "\'" + s + "\'" + ");"  ;
-                        @Html.ActionLink("Acheter l'Album", "../Achat/AcheterAlbum", new { idAlbum = Model.id }, new { onclick = confirm, @class = "btn btn-info btn-achat" })
+                        @Html.ActionLink("Ajouter l'Album au panier", "../Panier/AjoutAlbumPanier", new { idAlbum = Model.id }, new { onclick = confirm, @class = "btn btn-info btn-achat" })
                     }
                     
                 </div>

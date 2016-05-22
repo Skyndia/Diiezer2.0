@@ -20,5 +20,6 @@ namespace Diiezer2._0.Models
         public int idArtiste { get; set; }
         public String musique { get; set; }
         public double prix { get; set; }
+        public bool isInPanier { get; set; }
     }
 }

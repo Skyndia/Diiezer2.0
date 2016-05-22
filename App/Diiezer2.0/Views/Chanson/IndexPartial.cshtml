@@ -84,13 +84,16 @@
             </td>
             <td class="small-td">
                 @{
-                    if (item.isExtract)
+                    if (item.isInPanier)
+                    {
+                        <button type="button" class="btn btn-danger btn-achat">Dans le Panier</button>
+                    }
+                    else if (item.isExtract)
                     {
                         var url = HttpContext.Current.Request.Url.AbsoluteUri;
-                        var s = "Acheter " + item.titre + " pour " + item.prix + " € ?";
+                        var s = "Ajouter " + item.titre + " au panier ? ";
                         var confirm = "return confirm(" + "\'" + s + "\'" + ");";
-                        @Html.ActionLink(item.prix + "€", "../Achat/AcheterChanson", new { idChanson = item.idChanson, url = url }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })
-                        
+                        @Html.ActionLink(item.prix + "€", "../Panier/AjoutChansonPanier", new { idChanson = item.idChanson, url = url }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })
                     }
                     else
                     {

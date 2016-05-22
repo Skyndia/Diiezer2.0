@@ -82,6 +82,11 @@ namespace Diiezer2._0.Models
                 int noteArrondie = (int)(Math.Floor(item.Note));
                 if (partieDecimale > 0.5) noteArrondie += 1;
 
+                //La chanson est elle dans le panier de l'utilisateur ?
+                var panier = db.Panier.Where(p => p.Utilisateur == User.Identity.Name && p.Object == item.Id).ToList();
+                bool inPanier = false;
+                if (panier.Count > 0) { inPanier = true; }
+
                 vmChansonInformations.Add(new vmChansonInformation
                 {
                     album = item.Album1.Titre,
@@ -94,7 +99,8 @@ namespace Diiezer2._0.Models
                     idArtiste = item.Album1.Artiste1.Id,
                     idChanson = item.Id,
                     musique = musique,
-                    prix = (double)item.Prix / 100.0
+                    prix = (double)item.Prix / 100.0,
+                    isInPanier = inPanier
                 });
             }    
             return vmChansonInformations;
@@ -130,6 +136,10 @@ namespace Diiezer2._0.Models
             int noteArrondie = (int)(Math.Floor(chanson.Note));
             if (partieDecimale > 0.5) noteArrondie += 1;
 
+            var panier = db.Panier.Where(p => p.Utilisateur == User.Identity.Name && p.Object == chanson.Id).ToList();
+            bool inPanier = false;
+            if (panier.Count > 0) { inPanier = true; }
+
             vmChansonInformation info = new vmChansonInformation
             {
                 album = chanson.Album1.Titre,
@@ -143,7 +153,8 @@ namespace Diiezer2._0.Models
                 idArtiste = chanson.Album1.Artiste1.Id,
                 idChanson = chanson.Id,
                 musique = musique,
-                prix = (double)chanson.Prix / 100.0
+                prix = (double)chanson.Prix / 100.0,
+                isInPanier = inPanier
         };
 
             if (chanson == null)

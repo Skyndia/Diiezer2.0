@@ -47,16 +47,24 @@
     <div class="row">
         <div class="col-md-12">
             @{
-                if (Model.isExtract && User.Identity.IsAuthenticated)
+                if (Request.IsAuthenticated)
                 {
-                    var s = "Acheter " + Model.titre + " pour " + Model.prix + " € ?";
-                    var confirm = "return confirm(" + "\'" + s + "\'" + ");";
-                    @Html.ActionLink("Acheter", "../Achat/AcheterChanson", new { idChanson = Model.idChanson }, new { onclick = confirm, @class = "btn btn-info btn-achat", @style="margin-top:0px" });
+                    if (Model.isInPanier)
+                    {
+                        <button type="button" class="btn btn-default btn-danger">Dans le Panier</button>
+                    }
+                    else if (Model.isExtract)
+                    {
+                        var s = "Ajouter " + Model.titre + " au panier ? ";
+                        var confirm = "return confirm(" + "\'" + s + "\'" + ");";
+                        @Html.ActionLink("Ajouter au panier", "../Panier/AjoutChansonPanier", new { idChanson = Model.idChanson, url = "../Chanson/Details/" + Model.idChanson }, new { onclick = confirm, @class = "btn btn-info btn-achat", @style = "margin-top:0px" });
+                    }
+                    else
+                    {
+                        <p>Morceau acheté</p>
+                    }
                 }
-                else if (User.Identity.IsAuthenticated)
-                {
-                    <p>Morceaux acheté</p>
-                }
+
             }
         </div>
     </div>
