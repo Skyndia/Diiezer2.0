@@ -183,5 +183,11 @@ namespace Diiezer2._0.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult partialAudio(int idChanson)
+        {
+            string path = db.Chanson.Where(c => c.Id == idChanson).First().Musique;
+            return PartialView("partialAudio", path);
+        }
     }
 }

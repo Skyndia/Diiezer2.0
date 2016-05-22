@@ -8,8 +8,12 @@
         <h4>Achat</h4>
         <hr />
             @{
+                string idString = "";
+                int compteur = 0;
                 foreach (var item in Model)
                 {
+                    compteur++;
+                    idString = "divAudio" + compteur;
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                             <h5><a href="/Chanson/Details/@item.Chanson1.Id">@item.Chanson1.Titre</a> </h5>
@@ -20,12 +24,24 @@
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
                             <h5>@item.Date.ToString().Substring(0, 10)</h5>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-                            <audio src=@item.Chanson1.Musique controls></audio>                        
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3" id=@idString>
+                            <button type="button" class="btn btn-default" onclick="ecouter(@compteur, @item.Chanson1.Id)">Ecouter</button>                        
                         </div>
                     </div>
+                    <hr style="border:0px"/>
                 }
             }
        
     </div>
 </div>
+
+<a id="lien" href="/Achat/" data-ajax-update="#id" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
+
+
+<script type="text/javascript">
+    function ecouter(compteur, idM) {
+        $('#lien').attr('data-ajax-update', '#divAudio' + compteur);
+        $('#lien').attr('href', '/Achat/partialAudio?idChanson=' + idM);
+        $('#lien').click();
+    }
+</script>
