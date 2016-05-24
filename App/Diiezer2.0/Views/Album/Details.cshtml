@@ -119,27 +119,5 @@
 <a id="lienContenu" href="/../Note/Noter" data-ajax-update="#contenu" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
 
 
-<script type="text/javascript">
-    function noter(idC, note) {
-        alert('Merci d\'avoir voté !');
-        var idnote = 'note' + idC;
-        $('#lienNote').attr('href', '/../Note/Noter?idMusique=' + idC + '&&note=' + note);
-        $('#lienNote').attr('data-ajax-update', '#' + idnote);
-        $('#lienNote').click();
-    }
-    function afficherListeChanson(id)
-    {
-        $('#lienContenu').attr('href', '/Album/partialListeChanson?id=' + id);
-        $('#lienContenu').click();
-        $('#buttonList').attr('class', 'btn btn-default active listBtn');
-        $('#buttonEcouter').attr('class', 'btn btn-default');
-    }
-    function ecouterAlbum(id)
-    {
-        $('#lienContenu').attr('href', '/Album/partialEcouterAlbum?id=' + id);
-        $('#lienContenu').click();
-        $('#buttonList').attr('class', 'btn btn-default');
-        $('#buttonEcouter').attr('class', 'btn btn-default active ecouterBtn');      
-    }
-</script>
+
 

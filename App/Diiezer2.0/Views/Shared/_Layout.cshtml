@@ -27,9 +27,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"> <a href="~/Home/Nouveautees">Nouveautés</a></li>
-                    <li><a href="~/Home/LesMieuxNotees">Mieux Notées</a></li>
-                    <li class="dropdown">
+                    <li id="nouveautees"> <a href="~/Home/Nouveautees">Nouveautés</a></li>
+                    <li id="lesmieuxnotees"><a href="~/Home/LesMieuxNotees">Mieux Notées</a></li>
+                    <li class="dropdown" id="toutelamusique">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Toute votre musique <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Artistes", "Index2", "Artiste")</li>
@@ -52,7 +52,7 @@
                     <input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/QuickSearch'; document.form1.submit();" value="Rechercher" />
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/Panier/MonPanier">Mon Panier</a></li>
+                    <li id="panier"><a href="/Panier/MonPanier">Mon Panier</a></li>
                     <li>@Html.ActionLink("Recherche avancée", "Begin", "Research")</li>
                     <li class="dropdown">
 
@@ -96,6 +96,30 @@
             <p>&copy; @DateTime.Now.Year - My Diiezer.NET Application, sponsored by and sponsoring Bethesda and The Elder Scrolls Online</p>
         </footer>
     </div>
+
+    <script type="text/javascript">
+    function noter(idC, note) {
+        alert('Merci d\'avoir voté !');
+        var idnote = 'note' + idC;
+        $('#lienNote').attr('href', '/../Note/Noter?idMusique=' + idC + '&&note=' + note);
+        $('#lienNote').attr('data-ajax-update', '#' + idnote);
+        $('#lienNote').click();
+    }
+    function afficherListeChanson(id)
+    {
+        $('#lienContenu').attr('href', '/Album/partialListeChanson?id=' + id);
+        $('#lienContenu').click();
+        $('#buttonList').attr('class', 'btn btn-default active listBtn');
+        $('#buttonEcouter').attr('class', 'btn btn-default');
+    }
+    function ecouterAlbum(id)
+    {
+        $('#lienContenu').attr('href', '/Album/partialEcouterAlbum?id=' + id);
+        $('#lienContenu').click();
+        $('#buttonList').attr('class', 'btn btn-default');
+        $('#buttonEcouter').attr('class', 'btn btn-default active ecouterBtn');
+    }
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
