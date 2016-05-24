@@ -12,5 +12,6 @@ namespace Diiezer2._0.Models
         public int id { get; set; }
         public String nom { get; set; }
         public List<Album> albums { get; set; }
+        public string cover { get; set; }
     }
 }

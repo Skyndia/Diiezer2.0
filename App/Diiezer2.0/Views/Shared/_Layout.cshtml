@@ -124,7 +124,7 @@
     {
         var conf = 'Ajouter ' + titre + ' au panier ? ';
         if (confirm(conf)) {
-            $('#ajouterPanier').attr('href', '../Panier/partialAjouterChansonPanier?idChanson=' + idChanson);
+            $('#ajouterPanier').attr('href', '/../Panier/partialAjouterChansonPanier?idChanson=' + idChanson);
             $('#ajouterPanier').attr('data-ajax-update', '#idBtnPanier' + idChanson);
             $('#ajouterPanier').click();
         }

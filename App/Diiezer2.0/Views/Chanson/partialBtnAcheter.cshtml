@@ -2,7 +2,14 @@
 @{ 
     var titre = "\"" + Model.titre + "\"";
 }
-<button type="button" class="btn btn-danger btn-achat" onclick="acheter(@Model.idChanson, @titre)">@Model.prix €</button>
+@if (Request.IsAuthenticated)
+{
+    <button type="button" class="btn btn-danger btn-achat" onclick="acheter(@Model.idChanson, @titre)">@Model.prix €</button>
+}
+else
+{
+    <button type="button" class="btn btn-danger btn-achat" >@Model.prix €</button>
+}
 
 
 

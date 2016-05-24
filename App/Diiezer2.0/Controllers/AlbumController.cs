@@ -48,7 +48,6 @@ namespace Diiezer2._0.Models
                 }
                 else musique = item.Extrait;
                 string titre = item.Titre;
-                if (isExtract) { titre = item.Titre + " (Extrait)"; }
 
                 vmChansonInformations.Add(new vmChansonInformation
                 {

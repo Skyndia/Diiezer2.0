@@ -265,3 +265,16 @@ h4
     border-color : #141414;
 }
 
+.dark-box
+{
+    background-color:#141414;
+}
+
+.btn-long
+{
+    width : 100%;
+}
+.row-hover:hover
+{
+    background-color:rgba(127,127,127,0.8);
+}

@@ -54,12 +54,14 @@ namespace Diiezer2._0.Models
                 return HttpNotFound();
             }
 
-            DiiezerDBEntities context = new DiiezerDBEntities();
+
+            var albums = db.Album.Where(a => a.Artiste1.Id == id).ToList();
 
             vmArtisteInformation artisteInfo = new vmArtisteInformation {
                 id = artiste.Id,
                 nom = artiste.Nom,
-                albums = context.Album.Where(a => a.Artiste1.Id == id).ToList()
+                albums = albums,
+                cover = albums.First().Cover
             };
             return View(artisteInfo);
         }
