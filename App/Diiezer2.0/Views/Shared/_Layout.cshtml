@@ -129,6 +129,19 @@
             $('#ajouterPanier').click();
         }
     }
+    function retirerDuPanier(obj, titre)
+    {
+        var s = 'Supprimer ' + titre + ' du panier ?';
+        if (confirm(s))
+        {
+            //$('#supprimerPanier').attr('href', '/Panier/SupprimerPanier?id=' + obj);
+            //$('#supprimerPanier').click();
+            window.location.href = '@Url.Action("SupprimerPanier", "Panier")?id=' + obj;
+        }
+
+
+
+    }
     </script>
 
     @Scripts.Render("~/bundles/jquery")

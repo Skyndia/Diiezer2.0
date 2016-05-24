@@ -90,7 +90,7 @@ namespace Diiezer2._0.Controllers
             result.albums = vmAlbumsList;
             result.chansons = vmList;
             result.total = total;
-            return View(result);
+            return View("MonPanier",result);
         }
 
         
@@ -157,6 +157,23 @@ namespace Diiezer2._0.Controllers
 
             db.SaveChanges();
             return Redirect("../Album/Details/" + idAlbum.ToString());
+        }
+        
+        public ActionResult supprimerPanier(int id)
+        {
+            var user = User.Identity.Name;
+            var panier = db.Panier.Where(p => p.Object == id && p.Utilisateur == user).ToList();
+            if (panier.Count < 1)
+            {
+                return HttpNotFound("On essaye de supprimer du panier un truc qui n'existe pas !");
+            }
+            else
+            {
+                Panier aSupprimer = panier.First();
+                db.Panier.Remove(aSupprimer);
+                db.SaveChanges();
+            }
+            return MonPanier();
         }
     }
 }
