@@ -1,0 +1,12 @@
+﻿@model Diiezer2._0.Models.vmChansonInformation
+@{ 
+    var titre = "\"" + Model.titre + "\"";
+}
+<button type="button" class="btn btn-danger btn-achat" onclick="acheter(@Model.idChanson, @titre)">@Model.prix €</button>
+
+
+
+    @*var url = HttpContext.Current.Request.Url.AbsoluteUri;
+    var s = "Ajouter " + Model.titre + " au panier ? ";
+    var confirm = "return confirm(" + "\'" + s + "\'" + ");";
+    @Html.ActionLink(Model.prix + "€", "../Panier/AjoutChansonPanier", new { idChanson = Model.idChanson, url = url }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })*@

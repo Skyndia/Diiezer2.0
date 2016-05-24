@@ -55,25 +55,25 @@
                     }
                 </td>
                 <td class="small-td">
-                    @{
-                        if (item.isInPanier)
-                        {
-                            <button type="button" class="btn btn-danger btn-achat">Dans le Panier</button>
+                    @{ var idBtnPanier = "idBtnPanier" + item.idChanson;}
+                    <div id=@idBtnPanier>
+                        @{
+                            if (item.isInPanier)
+                            {
+                                Html.RenderPartial("../Chanson/partialDejaPanier");
+                            }
+                            else if (item.isExtract)
+                            {
+                                Html.RenderAction("partialBtnAcheter", "Chanson", new { vm = item });
+                            }
+                            else
+                            {
+                                <a href=@item.musique download>
+                                    <img src="~/Content/img/download.png" class="img-responsive btn-dl">
+                                </a>
+                            }
                         }
-                        else if (item.isExtract)
-                        {
-                            var url = HttpContext.Current.Request.Url.AbsoluteUri;
-                            var s = "Ajouter " + item.titre + " au panier ? ";
-                            var confirm = "return confirm(" + "\'" + s + "\'" + ");";
-                            @Html.ActionLink(item.prix + "€", "../Panier/AjoutChansonPanier", new { idChanson = item.idChanson, url = url }, new { onclick = confirm, @class = "btn btn-danger btn-achat" })
-                        }
-                        else
-                        {
-                            <a href=@item.musique download>
-                                <img src="~/Content/img/download.png" class="img-responsive btn-dl">
-                            </a>
-                        }
-                    }
+                    </div>
                 </td>
 
             </tr>
@@ -81,3 +81,4 @@
     </table>
 </div>
 
+<a id="ajouterPanier" href="/../Note/Noter" data-ajax-update="#note1" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>

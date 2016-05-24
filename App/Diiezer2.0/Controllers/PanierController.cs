@@ -115,6 +115,25 @@ namespace Diiezer2._0.Controllers
             return Redirect(url);
         }
 
+        public ActionResult partialAjouterChansonPanier(int idChanson)
+        {
+            Chanson chanson = db.Chanson.Where(c => c.Id == idChanson).First();
+            var panierChanson = db.Panier.Where(p => p.Object == idChanson).ToList();
+            var panierAlbum = db.Panier.Where(p => p.Object == chanson.Album).ToList();
+
+            if ((panierAlbum.Count == 0) && (panierChanson.Count == 0))
+            {
+                Panier nouveauDesir = new Panier();
+                nouveauDesir.Utilisateur = User.Identity.Name;
+                nouveauDesir.Object = idChanson;
+                nouveauDesir.IsAlbum = 0;
+                db.Panier.Add(nouveauDesir);
+                db.SaveChanges();
+            }
+
+            return PartialView("../Chanson/partialDejaPanier");
+        }
+
         public ActionResult AjoutAlbumPanier(int idAlbum)
         {
             var chansons = db.Chanson.Where(c => c.Album1.Id == idAlbum).ToList();

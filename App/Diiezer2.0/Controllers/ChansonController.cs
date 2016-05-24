@@ -213,6 +213,16 @@ namespace Diiezer2._0.Models
             return PartialView(model);
         }
 
+        public ActionResult partialBtnAcheter(vmChansonInformation vm)
+        {
+            return PartialView(vm);
+        }
+
+        public ActionResult partialDejaPanier()
+        {
+            return PartialView();
+        }
+
         // GET: Chanson/Create
         public ActionResult Create()
         {
