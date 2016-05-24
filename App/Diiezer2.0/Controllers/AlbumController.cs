@@ -120,7 +120,8 @@ namespace Diiezer2._0.Models
                 date = album.Date.ToString().Substring(0, 10),
                 toto = listLecteurString
             };
-
+            Session["vmAlbum"] = new vmAlbumInformation();
+            Session["vmAlbum"] = albuminfo;
             return albuminfo;
         }
 
@@ -153,8 +154,8 @@ namespace Diiezer2._0.Models
                 return HttpNotFound();
             }
 
-            vmAlbumInformation albuminfo = getVmAlbum(album, idA);
-
+            //vmAlbumInformation albuminfo = getVmAlbum(album, idA);
+            var albuminfo = Session["vmAlbum"] as vmAlbumInformation;
             return PartialView("../Album/partialLecteur", albuminfo);
         }
 
@@ -167,7 +168,8 @@ namespace Diiezer2._0.Models
                 return HttpNotFound();
             }
 
-            vmAlbumInformation albuminfo = getVmAlbum(album, idA);
+            //vmAlbumInformation albuminfo = getVmAlbum(album, idA);
+            var albuminfo = Session["vmAlbum"] as vmAlbumInformation;
 
             return PartialView("../Chanson/IndexPartialDark", albuminfo.chansons);
         }

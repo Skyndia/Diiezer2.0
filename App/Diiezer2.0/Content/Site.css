@@ -1,9 +1,10 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-image: url(/Content/img/musique.png);
+    background-image: url(/Content/img/wallpaper.png);
     background-size: 100%;
-    background-repeat :repeat-y;
+    background-repeat :no-repeat;
+    background-attachment: fixed;
     color : white;
 }
 
@@ -27,14 +28,14 @@ textarea {
     max-width: 280px;
 }
 
-.grey-box{
-    background-color : rgba(128, 128, 128, 0.9);
+.red-box{
+    background-color : rgba(255, 0, 0, 0.2);
     color : white;
     padding : 10px;
 }
 
-.grey-box2{
-    background-color : rgba(128, 128, 128, 0.5);
+.grey-box{
+    background-color : rgba(128, 128, 128, 0.2);
     color : white;
     padding : 10px;
 }
@@ -222,7 +223,7 @@ h4
 
 .panier
 {
-    background-color : rgba(70,70,70,1);
+    background-color : rgba(255,0,0,0.2);
     margin-top:40px;
     font-size:120%;
     font-family:Calibri
@@ -277,4 +278,13 @@ h4
 .row-hover:hover
 {
     background-color:rgba(127,127,127,0.8);
+}
+hr
+{
+    border-color : rgba(255,0,0,0.2);
+}
+
+.red-striped > tbody > tr:nth-child(2n+1) > td, .red-striped > tbody > tr:nth-child(2n+1) > th
+{
+    background-color : rgba(255,0,0,0.2);
 }
