@@ -1,0 +1,40 @@
+﻿@model Diiezer2._0.Models.vmChansonInformation
+
+    
+
+    @if (Request.IsAuthenticated)
+    {
+        int j;
+        for (int i = 0; i < 5; i++)
+        {
+            j = i + 1;
+            if (i < Model.note)
+            {
+                <a onclick="noter(@Model.idChanson, @j)">
+                    <img src="~/Content/img/fullstar2.png" style="width:15%;height:auto;">
+                </a>
+            }
+            else
+            {
+                <a onclick="noter(@Model.idChanson, @j)">
+                    <img src="~/Content/img/emptystar2.png" style="width:15%;height:auto; " >
+                </a>
+            }
+        }
+    }
+    else
+    {
+        int j;
+        for (int i = 0; i < 5; i++)
+        {
+            j = i + 1;
+            if (i < Model.note)
+            {
+                <img src="~/Content/img/fullstar2.png" style="width:15%;height:auto;">
+            }
+            else
+            {
+                <img src="~/Content/img/emptystar2.png" style="width:15%;height:auto;">
+            }
+        }
+    }

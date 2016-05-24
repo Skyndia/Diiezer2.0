@@ -14,12 +14,11 @@ namespace Diiezer2._0.Controllers
     {
         private DiiezerDBEntities db = new DiiezerDBEntities();
 
-        //Permet de noter en cliquant sur les étoiles
-        public ActionResult Noter(string idMusique, int note, string url)
+        //Permet de noter en cliquant sur les 
+        public ActionResult Noter(string idMusique, string note)
         {
             int idM = int.Parse(idMusique);
-
-
+            int not = int.Parse(note);
             var notes = db.Note.Where(c => c.Chanson1.Id == idM && c.Utilisateur == User.Identity.Name).ToList();
             int ancienneNoteChanson = 0;
             //Update de la table note
@@ -28,12 +27,12 @@ namespace Diiezer2._0.Controllers
             {
                 var currentNote = notes.First();
                 ancienneNoteChanson = currentNote.Valeur; //Save qui servira pour noter l'album
-                currentNote.Valeur = note;              
+                currentNote.Valeur = not;              
             }
             else//Si on ajoute une nouvelle note
             {
                 Note nouvelleNote = new Note();
-                nouvelleNote.Valeur = note;
+                nouvelleNote.Valeur = not;
                 nouvelleNote.Chanson = idM;
                 nouvelleNote.Utilisateur = User.Identity.Name;
                 db.Note.Add(nouvelleNote);
@@ -48,17 +47,17 @@ namespace Diiezer2._0.Controllers
             if (notes.Count() > 0) //Si il y avait déjà une note
             {
                 nbNoteChanson = chanson.NbNote;
-                newNoteChanson = (ancienneNote * nbNoteChanson - ancienneNoteChanson + note) / nbNoteChanson;
+                newNoteChanson = (ancienneNote * nbNoteChanson - ancienneNoteChanson + not) / nbNoteChanson;
             }
             else
             {
                 nbNoteChanson = chanson.NbNote + 1;
-                newNoteChanson = (ancienneNote * chanson.NbNote + note) / nbNoteChanson;
+                newNoteChanson = (ancienneNote * chanson.NbNote + not) / nbNoteChanson;
             }
 
             if (chanson.NbNote == 0) // Si la chanson n'avait pas encore été notée
             {
-                chanson.Note = note;
+                chanson.Note = not;
                 chanson.NbNote = 1;
             }
             else
@@ -83,7 +82,26 @@ namespace Diiezer2._0.Controllers
             
 
             db.SaveChanges();
-            return Redirect(url);
+            vmChansonInformation result = new vmChansonInformation();
+            result.idChanson = idM;
+
+            //Je veux arrondir chanson.note---------
+            double partieDecimale = chanson.Note - Math.Floor(chanson.Note);
+            int noteArrondie = (int)(Math.Floor(chanson.Note));
+            if (partieDecimale > 0.5) noteArrondie += 1;
+            result.note = noteArrondie;
+
+            return PartialView("partialNote", result);
+
+        }
+
+        //GET : partialNote
+        public ActionResult partialNote(int idChanson, int note)
+        {
+            vmChansonInformation result = new vmChansonInformation();
+            result.note = note;
+            result.idChanson = idChanson;
+            return PartialView(result);
         }
 
         // GET: Note
@@ -93,112 +111,6 @@ namespace Diiezer2._0.Controllers
             return View(note.ToList());
         }
 
-        // GET: Note/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Note note = db.Note.Find(id);
-            if (note == null)
-            {
-                return HttpNotFound();
-            }
-            return View(note);
-        }
-
-        // GET: Note/Create
-        public ActionResult Create()
-        {
-            ViewBag.Chanson = new SelectList(db.Chanson, "Id", "Titre");
-            return View();
-        }
-
-        // POST: Note/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Chanson,Utilisateur,Valeur")] Note note)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Note.Add(note);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Chanson = new SelectList(db.Chanson, "Id", "Titre", note.Chanson);
-            return View(note);
-        }
-
-        // GET: Note/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Note note = db.Note.Find(id);
-            if (note == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Chanson = new SelectList(db.Chanson, "Id", "Titre", note.Chanson);
-            return View(note);
-        }
-
-        // POST: Note/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Chanson,Utilisateur,Valeur")] Note note)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(note).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Chanson = new SelectList(db.Chanson, "Id", "Titre", note.Chanson);
-            return View(note);
-        }
-
-        // GET: Note/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Note note = db.Note.Find(id);
-            if (note == null)
-            {
-                return HttpNotFound();
-            }
-            return View(note);
-        }
-
-        // POST: Note/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Note note = db.Note.Find(id);
-            db.Note.Remove(note);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

@@ -32,10 +32,19 @@
             }
     </div>
 
+<a id="lienNote" href="/../Note/Noter" data-ajax-update="#note1" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
+
 </div>
     <script type="text/javascript">
         function select() {
             $('#lien').attr('href', '/Chanson?tri=' + document.getElementById('select').value);
             $('#lien').click();
+        }
+        function noter(idC, note) {
+            var idnote = 'note' + idC;
+            $('#lienNote').attr('href', '/../Note/Noter?idMusique=' + idC + '&&note=' + note);
+            $('#lienNote').attr('data-ajax-update', '#'+idnote);
+            alert('Merci d\'avoir voté !');
+            $('#lienNote').click();
         }
     </script>

@@ -28,30 +28,16 @@ namespace Diiezer2._0.Models
             return View(album);
         }
 
-        // GET: Album/Details/5
-        public ActionResult Details(int? id)
+        private vmAlbumInformation getVmAlbum(Album album, int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var context = new DiiezerDBEntities();
-            
-            Album album = context.Album.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-
-            var chansons = context.Chanson.Where(c => c.Album1.Id == id).ToList();
+            var chansons = db.Chanson.Where(c => c.Album1.Id == id).ToList();
             string user = User.Identity.Name;
 
             List<vmChansonInformation> vmChansonInformations = new List<vmChansonInformation>();
 
             foreach (var item in chansons)
             {
-               
+
                 string musique;
                 bool isExtract = true;
 
@@ -116,8 +102,8 @@ namespace Diiezer2._0.Models
             }
             listLecteurString = listLecteurString.Remove(listLecteurString.Count() - 1);
             listLecteurString += "]";
-            
-            
+
+
             //------------------------------------
             vmAlbumInformation albuminfo = new vmAlbumInformation
             {
@@ -135,10 +121,57 @@ namespace Diiezer2._0.Models
                 date = album.Date.ToString().Substring(0, 10),
                 toto = listLecteurString
             };
-      
+
+            return albuminfo;
+        }
+
+        // GET: Album/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            Album album = db.Album.Find(id);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+
+            vmAlbumInformation albuminfo = getVmAlbum(album, id.Value);
+
+
             return View(albuminfo);
         }
 
+        public ActionResult partialEcouterAlbum(string id)
+        {
+            int idA = int.Parse(id);
+            Album album = db.Album.Find(idA);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+
+            vmAlbumInformation albuminfo = getVmAlbum(album, idA);
+
+            return PartialView("../Album/partialLecteur", albuminfo);
+        }
+
+        public ActionResult partialListeChanson(string id)
+        {
+            int idA = int.Parse(id);
+            Album album = db.Album.Find(idA);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+
+            vmAlbumInformation albuminfo = getVmAlbum(album, idA);
+
+            return PartialView("../Chanson/IndexPartialDark", albuminfo.chansons);
+        }
 
         // GET: Album/Create
         public ActionResult Create()
@@ -224,13 +257,6 @@ namespace Diiezer2._0.Models
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
     }
 }

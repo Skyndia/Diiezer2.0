@@ -4,7 +4,6 @@
 
 <!-- Test **************************** -->
 <div class="container">
-
     <div class="column add-bottom">
         <div id="mainwrap">
             <div id="nowPlay">
@@ -33,46 +32,19 @@
                                     <div class="plNum col-xs-1 col-sm-1 col-md-1">@compteur</div>
                                     <div class="plTitle col-xs-6 col-sm-6 col-md-7">@item.titre</div>                                   
                                     <div class="plStar col-xs-3 col-sm-3 col-md-2">
-                                        <!--Test************************-->
-                                        @{
-                                            if (Request.IsAuthenticated)
-                                            {
-                                                int j;
-                                                for (int i = 0; i < 5; i++)
-                                                {
-                                                    j = i + 1;
-                                                    if (i < item.note)
-                                                    {
-                                                        <a href="../../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Album/Details/@item.idAlbum">
-                                                            <img src="~/Content/img/fullstar2.png" style="width:10%;height:auto;">
-                                                        </a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <a href="../../Note/Noter?idMusique=@item.idChanson&&note=@j&&url=../Album/Details/@item.idAlbum">
-                                                            <img src="~/Content/img/emptystar2.png" style="width:10%;height:auto;">
-                                                        </a>
-                                                    }
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                @{
+                                                    string idnote = "note" + item.idChanson;
+                                                    <div id=@idnote>
+                                                        @{
+                                                            Html.RenderAction("partialNote", "Note", new { idChanson = item.idChanson, note = item.note });
+                                                        }
+                                                    </div>
                                                 }
-                                            }
-                                            else
-                                            {
-                                                for (int i = 0; i < 5; i++)
-                                                {
-                                                    if (i < item.note)
-                                                    {
-                                                        <img src="~/Content/img/FullStar2.png" style="width:10%;height:auto;">
-                                                    }
-                                                    else
-                                                    {
-
-                                                        <img src="~/Content/img/EmptyStar2.png" style="width:10%;height:auto;">
-                                                    }
-                                                }
-                                            }
-                                        }
+                                            </div>
+                                        </div>
                                         
-                                        <!--Test************************-->
                                     </div>
                                     <div class="plLength col-xs-2 col-sm-2 col-md-2">
                                         @{var duree = (Model.chansons.ElementAt(compteur - 1).durée / 60).ToString() + " min " + (Model.chansons.ElementAt(compteur - 1).durée % 60).ToString();
@@ -90,6 +62,6 @@
         </div>
     </div>
 </div>
-<!-- Test **************************** -->
+
 
 

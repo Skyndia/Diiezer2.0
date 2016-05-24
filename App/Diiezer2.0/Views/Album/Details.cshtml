@@ -3,6 +3,7 @@
     ViewBag.Title = "Album";
 }
 
+
     <div class="row">
         <hr />
         <h4>@Model.nom</h4>
@@ -82,17 +83,63 @@
         </div>
     </div>
     <hr />
-    <hr />
-    @{
-        Html.RenderPartial("partialLecteur", Model);
-    }
-
-    @{ 
-        Html.RenderPartial("../Chanson/IndexPartial", Model.chansons);
-    }
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 colGauche">
+                <button type="button" id="buttonList" class="btn btn-default" style="width:100%" onclick="afficherListeChanson(@Model.id)">Liste des chansons</button>
+            </div>
+            <div class="col-md-6 colDroite">
+                <button type="button" id="buttonEcouter" class="btn btn-default active ecouterBtn" style="width:100%" onclick="ecouterAlbum(@Model.id)">Ecouter l'album</button>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="col-md-6">
+            <button type="button" id="buttonList" class="btn btn-default" style="width:100%" onclick="afficherListeChanson(@Model.id)">Liste des chansons</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" id="buttonEcouter" class="btn btn-default active" style="width:100%" onclick="ecouterAlbum(@Model.id)" >Ecouter l'album</button>
+        </div>
+    </div>
+    <hr />*@
+    <div id="contenu">
+        @{
+            Html.RenderPartial("partialLecteur", Model);
+        }
+    </div>
+    
 
     <p>
         @Html.ActionLink("Retourner à la liste des albums", "Index2")
     </p>
 
 </div>
+
+<a id="lienNote" href="/../Note/Noter" data-ajax-update="#note1" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
+<a id="lienContenu" href="/../Note/Noter" data-ajax-update="#contenu" data-ajax-mode="replace" data-ajax-method="GET" data-ajax="true" class="hidden">Actualiser</a>
+
+
+<script type="text/javascript">
+    function noter(idC, note) {
+        alert('Merci d\'avoir voté !');
+        var idnote = 'note' + idC;
+        $('#lienNote').attr('href', '/../Note/Noter?idMusique=' + idC + '&&note=' + note);
+        $('#lienNote').attr('data-ajax-update', '#' + idnote);
+        $('#lienNote').click();
+    }
+    function afficherListeChanson(id)
+    {
+        $('#lienContenu').attr('href', '/Album/partialListeChanson?id=' + id);
+        $('#lienContenu').click();
+        $('#buttonList').attr('class', 'btn btn-default active listBtn');
+        $('#buttonEcouter').attr('class', 'btn btn-default');
+    }
+    function ecouterAlbum(id)
+    {
+        $('#lienContenu').attr('href', '/Album/partialEcouterAlbum?id=' + id);
+        $('#lienContenu').click();
+        $('#buttonList').attr('class', 'btn btn-default');
+        $('#buttonEcouter').attr('class', 'btn btn-default active ecouterBtn');      
+    }
+</script>
+

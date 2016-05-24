@@ -42,6 +42,7 @@ textarea {
 a
 {
     color : white;
+    cursor : pointer;
 }
 
 a:focus
@@ -51,7 +52,8 @@ a:focus
 
 a:hover
 {
-    color : orangered;
+    cursor:pointer;
+    color:white;
 }
 
 .portfolio-item {
@@ -225,3 +227,41 @@ h4
     font-size:120%;
     font-family:Calibri
 }
+
+.btn:active, .btn.active
+{
+    box-shadow:inset 0px 3px 5px rgba(0,0,0,0.300)
+}
+
+.btn.ecouterBtn
+{
+    background-color : #141414;
+    border-color : #141414;
+    border-radius : 0;
+    color : white;
+}
+
+.btn.listBtn
+{
+    background-color : #141414;
+    border-color : #141414;
+    border-radius : 0;
+    color : white;
+}
+
+.colGauche
+{
+    padding-right : 0px;
+}
+
+.colDroite
+{
+    padding-left : 0px;
+}
+
+.table-dark
+{
+    background-color : #141414;
+    border-color : #141414;
+}
+
