@@ -50,7 +50,7 @@
                     <li class="hidden-sm">
                         <form class="navbar-form navbar-left" role="search" name="form1" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search" name="critere">
+                                <input type="text" class="form-control" placeholder="Recherche..." name="critere">
                             </div>
                             <input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/QuickSearch'; document.form1.submit();" value="Rechercher" />
                         </form>
@@ -64,11 +64,11 @@
                             <li>@Html.ActionLink("Recherche avancée", "Begin", "Research")</li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <form class="navbar-form navbar-left" role="search" name="form1" method="post">
+                                <form class="navbar-form navbar-left" role="search" name="form2" method="post">
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Search" name="critere">
                                     </div>
-                                    <input type="button" class="btn btn-default" onclick="document.form1.action = '/Research/QuickSearch'; document.form1.submit();" value="Rechercher" />
+                                    <input type="button" class="btn btn-default" onclick="document.form2.action = '/Research/QuickSearch'; document.form2.submit();" value="Rechercher" />
                                 </form>
                             </li>
                         </ul>
@@ -113,7 +113,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My Diiezer.NET Application, sponsored by and sponsoring Bethesda and The Elder Scrolls Online</p>
+            <p>&copy; @DateTime.Now.Year - Ci gîsent les restes d'une blague de Mika</p>
         </footer>
     </div>
 
@@ -191,7 +191,6 @@
             document.getElementById('intro3').style.opacity = 1 - k;
             k = k - 0.005;
         };
-
     </script>
 
     
