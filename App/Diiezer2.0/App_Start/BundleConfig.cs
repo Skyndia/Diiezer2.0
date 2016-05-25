@@ -23,7 +23,8 @@ namespace Diiezer2._0
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/audio.js",
-                      "~/Scripts/jquery.unobtrusive-ajax.js"));
+                      "~/Scripts/jquery.unobtrusive-ajax.js",
+                      "~/Scripts/imageDelayed.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/audio.css",

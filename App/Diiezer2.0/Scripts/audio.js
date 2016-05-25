@@ -14,7 +14,6 @@ var loadTrackSave;
 // Inspiration: http://jonhall.info/how_to/create_a_playlist_for_html5_audio
 // Mythium Archive: https://archive.org/details/mythium/
 $(document).ready(function ($) {
-    console.log('coucou');
     var supportsAudio = !!document.createElement('audio').canPlayType;
     if (supportsAudio) {
         var index = 0,

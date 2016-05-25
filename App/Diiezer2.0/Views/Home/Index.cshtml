@@ -1,38 +1,26 @@
 ﻿
-<div class="red-box container">
+@{ 
+    ViewBag.Title = "Accueil";
+}
+<div class="container">
     <div class="row">
-        <div class="col-md-4 col-lg-offset-4">
-            <h2>Bienvenue sur Diiezer! </h2>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-11 col-lg-offset-1">
-            <h3>Ce site vous permet de noter des musiques, d'écouter des extraits, d'acheter celles vous plaisent et vous permet même d'écouter toutes les musiques que vous avez achetées complètes!</h3>
+        <div class="col-md-10 col-md-offset-1">
+            <img id="intro1" src="~/Content/img/bienvenu2.png" class="img-responsive" style="opacity:0"/>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <a href="/Album/Details/3">
-                <img class="img-responsive" src="/Content/cover/album/3.jpg" alt="">
-            </a>
+        <div class="col-md-10 col-md-offset-1">
+            <img id="intro2" src="~/Content/img/Achetez2.png" class="img-responsive" style="opacity:0" />
         </div>
-        <div class="col-md-8">
-            <div class="row">
-                Puisque cela nous fais plaisir de vous voire sur notre site, nous vous proposons ce magnifique morceau complet à écouter sur cette page.
-
-            </div>
-            <div class="row">
-                <audio src="/content/song/musique/32.mp3" controls autoplay loop></audio>
-
-            </div>
-        </div>
-        
-        
     </div>
-
-
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <img id="intro3" src="~/Content/img/Notez2.png" class="img-responsive" style="opacity:0" />
+        </div>
+    </div>
 </div>
 
+<div class="row">
+    <audio src="/content/song/musique/27.mp3" controls autoplay loop class="hidden"></audio>
 
-
+</div>

@@ -8,7 +8,7 @@
 @for (int i = 0; i < Model.Count() / 3; i++)
 {
     <div class="row">
-        <div class="col-md-4 portfolio-item">
+        <div class="col-md-4 ">
             <a href="/Artiste/Details/@Model.ElementAt(3 * i).id ">
                 <img class="img-responsive" src=@Model.ElementAt(3*i).cover alt="">
             </a>
@@ -16,7 +16,7 @@
                 <a href="/Artiste/Details/@Model.ElementAt(3 * i).id ">@Model.ElementAt(3 * i).nom</a>
             </h3>
         </div>
-        <div class="col-md-4 portfolio-item">
+        <div class="col-md-4 ">
             <a href="/Artiste/Details/@Model.ElementAt(3 * i + 1).id ">
                 <img class="img-responsive" src=@Model.ElementAt(3*i + 1).cover alt="">
             </a>
@@ -24,7 +24,7 @@
                 <a href="/Artiste/Details/@Model.ElementAt(3 * i + 1).id ">@Model.ElementAt(3 * i + 1).nom</a>
             </h3>
         </div>
-        <div class="col-md-4 portfolio-item">
+        <div class="col-md-4 ">
             <a href="/Artiste/Details/@Model.ElementAt(3 * i + 2).id ">
                 <img class="img-responsive" src=@Model.ElementAt(3*i + 2).cover alt="">
             </a>
@@ -47,7 +47,7 @@
         if (reste == 1)
         {
             <div class="row">
-                <div class="col-md-4 portfolio-item">
+                <div class="col-md-4 ">
                     <a href="#">
                         <img class="img-responsive" src=@Model.ElementAt(3 * quotient).cover alt="">
                     </a>
@@ -60,7 +60,7 @@
         else //reste == 2
         {
             <div class="row">
-                <div class="col-md-4 portfolio-item">
+                <div class="col-md-4 ">
                     <a href="/Artiste/Details/@Model.ElementAt(3 * quotient).id">
                         <img class="img-responsive" src=@Model.ElementAt(3 * quotient).cover alt="">
                     </a>
@@ -68,7 +68,7 @@
                         <a href="/Artiste/Details/@Model.ElementAt(3 * quotient).id ">@Model.ElementAt(3 * quotient).nom</a>
                     </h3>
                 </div>
-                <div class="col-md-4 portfolio-item">
+                <div class="col-md-4 ">
                     <a href="/Artiste/Details/@Model.ElementAt(3 * quotient + 1).id">
                         <img class="img-responsive" src=@Model.ElementAt(3 * quotient + 1).cover alt="">
                     </a>
